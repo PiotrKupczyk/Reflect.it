@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Reflect.it</string>
+
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="mainActivityTitle">Znalezione lustra w sieci</string>
+    <string name="scanButton">Skanuj</string>
 </resources>
