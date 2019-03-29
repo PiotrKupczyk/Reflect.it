@@ -78,4 +78,5 @@ dependencies {
 
     //pin libary
     implementation 'com.github.GoodieBag:Pinview:v1.3'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
