@@ -8,5 +8,18 @@
             android:id="@+id/availableDevicesView"
             android:name="com.example.reflectit.ui.device.available.list.AvailableDevicesView"
             android:label="available_devices_fragment"
-            tools:layout="@layout/available_devices_fragment"/>
+            tools:layout="@layout/available_devices_fragment">
+        <action android:id="@+id/action_pair" app:destination="@+id/pairDeviceView"/>
+    </fragment>
+    <fragment android:id="@+id/pairDeviceView" android:name="com.example.reflectit.ui.device.pair.PairDeviceView"
+              android:label="pair_device_fragment" tools:layout="@layout/pair_device_fragment">
+        <argument android:name="mirrorIp" app:argType="string"/>
+        <argument android:name="mirrorPort" app:argType="string"/>
+        <action android:id="@+id/actionMirrorProfiles" app:destination="@+id/profilesListView"/>
+    </fragment>
+    <fragment android:id="@+id/profilesListView"
+              android:name="com.example.reflectit.ui.device.available.details.profiles.list.ProfilesListView"
+              android:label="profiles_list_fragment" tools:layout="@layout/profiles_list_fragment">
+        <argument android:name="id" app:argType="string"/>
+    </fragment>
 </navigation>
