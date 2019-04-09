@@ -15,7 +15,7 @@ object NetworkService {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
                 manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
 //                if (!serviceInfo?.serviceType.equals(SERVICE_TYPE)) {
-//                    println("Unknown Service Type: " + serviceInfo?.serviceType);
+//                    println("Unknown Service FieldType: " + serviceInfo?.serviceType);
 //                } else if (serviceInfo?.serviceName.equals(SERVICE_NAME)) {
 //                    println("Same machine: $SERVICE_NAME");
 //                } else if (serviceInfo?.serviceName!!.contains(SERVICE_NAME)) {
@@ -54,7 +54,7 @@ object NetworkService {
             // The name is subject to change based on conflicts
             // with other services advertised on the same network.
             serviceName = "SmartMirror"
-            serviceType = "_http._tcp"
+            serviceType = "_smartmirror._tcp."
             setPort(port)
         }
         manager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, object : NsdManager.RegistrationListener {

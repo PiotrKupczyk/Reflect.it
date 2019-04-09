@@ -1,4 +1,4 @@
-package com.example.reflectit.ui.device.pair
+package com.example.reflectit.ui.device.available.pair
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

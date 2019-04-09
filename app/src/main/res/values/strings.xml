@@ -7,4 +7,5 @@
     <string name="mainActivityTitle">Znalezione lustra w sieci</string>
     <string name="scanButton">Skanuj</string>
     <string name="defaultMirrorName"> Lustro </string>
+    <string name="hostUrl"/>
 </resources>

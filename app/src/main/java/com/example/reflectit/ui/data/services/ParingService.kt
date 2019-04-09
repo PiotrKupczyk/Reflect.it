@@ -10,7 +10,7 @@ import retrofit2.http.Header
 class ParryData(@SerializedName("parryCode") val code: String,
                    @SerializedName("deviceIdentyficator") val id: String)
 
-public interface MirrorApi {
+interface ParingService {
     @POST("device/parry")
     fun parry (@Body parryDetails: ParryData) : Call<String>
 

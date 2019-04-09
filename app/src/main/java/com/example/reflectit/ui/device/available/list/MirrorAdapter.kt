@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.models.Mirror
 
-class MirrorAdapter(private var mirrors: ArrayList<Mirror>) : RecyclerView.Adapter<MirrorAdapter.MirrorHolder>() {
+class MirrorAdapter(private var mirrors: ArrayList<Mirror>, val cellOnClickHandler: (ip: String, port: String) -> Unit) : RecyclerView.Adapter<MirrorAdapter.MirrorHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MirrorHolder {
         val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.mirror_item, parent, false)
@@ -25,13 +24,10 @@ class MirrorAdapter(private var mirrors: ArrayList<Mirror>) : RecyclerView.Adapt
         val mirror: Mirror = mirrors[position]
         holder.mirrorName.setText(R.string.defaultMirrorName)
         holder.mirrorImage.setImageResource(R.drawable.mirror_image)
-
-        holder.itemView.setOnClickListener(View.OnClickListener {
-
-            // pass ip to pair fragment and navigate to it
-            val navAction = AvailableDevicesViewDirections.actionPair(mirror.ip.toString(), mirror.port.toString())
-            Navigation.findNavController(it).navigate(navAction)
-        })
+        holder.itemView.setOnClickListener {
+            cellOnClickHandler(mirror.ip.toString(), mirror.port.toString())
+            //pass ip to pair fragment and navigate to it
+        }
     }
 
     fun setData(newData: ArrayList<Mirror>) {

@@ -1,50 +1,50 @@
-package com.example.reflectit.ui.device.pair
+package com.example.reflectit.ui.device.available.pair
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.reflectit.ui.data.services.MirrorApi
+import com.example.reflectit.ui.data.services.ParingService
 import com.example.reflectit.ui.data.services.ParryData
-import kotlinx.android.synthetic.main.pair_device_fragment.*
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.math.log
 
 class PairDeviceRepository(val mirrorIp: String, val mirrorPort: String) {
 
-    val builder: Retrofit.Builder
-    val retrofit: Retrofit
-    val mirrorApi: MirrorApi
+    private val builder: Retrofit.Builder
+    private val retrofit: Retrofit
+    val paringService: ParingService
     var token = ""
 
     init {
-        val base = "http:/$mirrorIp:$mirrorPort/mirror/"
-        builder = Retrofit.Builder().baseUrl(base).addConverterFactory(GsonConverterFactory.create())
+        val baseUrl = "http:/$mirrorIp:$mirrorPort/mirror/"
+        builder = Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create())
         retrofit = builder.build()
-        mirrorApi = retrofit.create(MirrorApi::class.java)
+        paringService = retrofit.create(ParingService::class.java)
     }
 
-    fun pair(code: String) : LiveData<Boolean> {
+//    enum class PairResponse { Success, Failure }
+    fun pair(code: String): LiveData<Boolean> { //TODO better change to enum result
         val result= MutableLiveData<Boolean>()
         val mirrorId = getMirrorId()
         val parryData= ParryData(code, mirrorId)
 
-        var call = mirrorApi.parry(parryData)
+        val call = paringService.parry(parryData)
         call.enqueue(object: Callback<String>{
             override fun onFailure(call: Call<String>, t: Throwable) {
+                result.postValue(false)
                 Log.d("ERROR 1", "PAIR POST ERROR")
             }
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if(response.isSuccessful){
                     token= response.body().toString()
+                    result.postValue(true)
                     Log.d("ok", token)
                 }
                 else{
+                    result.postValue(false)
                     Log.d("ERROR 2", "PAIR POST ERROR")
                 }
             }
@@ -56,7 +56,7 @@ class PairDeviceRepository(val mirrorIp: String, val mirrorPort: String) {
 //        val mirrorId = getMirrorId()
 //        val parryData= ParryData(code, mirrorId)
 //
-//        var call = mirrorApi.parry(parryData)
+//        var call = paringService.parry(parryData)
 //        call.enqueue(object: Callback<String>{
 //            override fun onFailure(call: Call<String>, t: Throwable) {
 //                Log.d("ERROR 1", "PAIR POST ERROR")
@@ -75,7 +75,7 @@ class PairDeviceRepository(val mirrorIp: String, val mirrorPort: String) {
 
     fun getMirrorId() : String{
         var mirrorId=""
-        var call = mirrorApi.getMirrorId()
+        val call = paringService.getMirrorId()
         call.enqueue(object: Callback<String>{
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.d("ERROR", "PAIR GET ID ERROR");

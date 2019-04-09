@@ -1,15 +1,15 @@
 package com.example.reflectit.ui.device.available.list
 
-import android.net.nsd.NsdManager
+import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
+import com.example.reflectit.R
 import com.example.reflectit.ui.data.models.Mirror
+import com.example.reflectit.ui.extensions.Constant
 
 
-class AvailableDevicesViewModel(manager: NsdManager, private val repository: AvailableDevicesRepository) : ViewModel() {
-
-    var mirrors = MutableLiveData <ArrayList<Mirror>>()
+class AvailableDevicesViewModel(private val repository: AvailableDevicesRepository) : ViewModel() {
 
 //    init {
 //        repository.getAvailableDevices().observeForever {
@@ -20,5 +20,13 @@ class AvailableDevicesViewModel(manager: NsdManager, private val repository: Ava
 
     fun getAvailableDevices() : LiveData<ArrayList<Mirror>> {
         return repository.getAvailableDevices()
+    }
+
+    fun saveBaseUrl(sharedPreferences: SharedPreferences, ip: String, port: String) {
+        sharedPreferences.edit {
+            this.putString(Constant.HOSTNAMEKEY, "http:/$ip:$port")
+            commit()
+        }
+        //here save to ip and port to shared prefs
     }
 }

@@ -1,4 +1,4 @@
-package com.example.reflectit.ui.device.pair
+package com.example.reflectit.ui.device.available.pair
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,16 +9,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.reflectit.R
-import com.goodiebag.pinview.Pinview
 import kotlinx.android.synthetic.main.pair_device_fragment.*
 import com.example.reflectit.ui.device.available.list.AvailableDevicesViewDirections as AvailableDevicesViewDirections1
 
 
 
 class PairDeviceView : Fragment() {
-
-    var mirroIp=""
-    var mirrorPort=""
+    lateinit var mirroIp: String
+    lateinit var mirrorPort: String
 
     companion object {
         fun newInstance() = PairDeviceView()
@@ -43,8 +41,8 @@ class PairDeviceView : Fragment() {
             mirrorPort="5000"
 
             //only for testing
-            ipTextView.setText(arg.mirrorIp)
-            portTextView.setText(mirrorPort)
+            ipTextView.text = arg.mirrorIp
+            portTextView.text = mirrorPort
         }
 
         viewModel = ViewModelProviders.of(this,  PairDeviceViewModelFactory(PairDeviceRepository(mirroIp, mirrorPort)))
@@ -52,15 +50,15 @@ class PairDeviceView : Fragment() {
         // TODO: Use the ViewModel
 
 
-        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser ->
+        pinView.setPinViewEventListener { pinview, _ ->
             viewModel.pairDevice(pinview.value).observe(this, Observer {
-                if(it==true){
-                    val navAction = PairDeviceViewDirections.actionMirrorProfiles()
-                        //TODO mirror id here
-                    Navigation.findNavController(this.view!!).navigate(navAction)
+                if(it){
+                    val dummyId = "Dummy id" //TODO mirror id here
+//                    val navAction = PairDeviceViewDirections.actionMirrorProfiles(dummyId)
+//                    Navigation.findNavController(this.view!!).navigate(navAction)
                 }
             })
-        })
+        }
     }
 
 
