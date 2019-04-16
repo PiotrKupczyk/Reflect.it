@@ -21,12 +21,5 @@ class AvailableDevicesViewModel(private val repository: AvailableDevicesReposito
     fun getAvailableDevices() : LiveData<ArrayList<Mirror>> {
         return repository.getAvailableDevices()
     }
-
-    fun saveBaseUrl(sharedPreferences: SharedPreferences, ip: String, port: String) {
-        sharedPreferences.edit {
-            this.putString(Constant.HOSTNAMEKEY, "http:/$ip:$port")
-            commit()
-        }
-        //here save to ip and port to shared prefs
-    }
+    
 }

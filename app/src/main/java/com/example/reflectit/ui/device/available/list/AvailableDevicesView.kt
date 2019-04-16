@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.edit
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,9 +54,13 @@ class AvailableDevicesView : Fragment() {
     private fun bindRecyclerView() {
         val recyclerView = mirrorsList as RecyclerView
         val mirrorAdapter = MirrorAdapter(mirrorList) { ip, port ->
-//            this.context.getSharedPreferences().edit().
-            val hostnameSharedPref = this.context?.getSharedPreferences(Constant.HOSTNAMEKEY, Context.MODE_PRIVATE)!!
-            viewModelAvailable.saveBaseUrl(hostnameSharedPref, ip, port)
+
+            val hostnameSharedPref = this.context?.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE)!!
+            hostnameSharedPref.edit {
+                this.putString(Constant.HOSTNAMEKEY, "$ip:$port")
+                apply()
+            }
+
             Navigation.findNavController(this.view!!).navigate(R.id.pairDeviceView)
         }
 
