@@ -3,7 +3,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/mobile_navigation"
-            app:startDestination="@id/availableDevicesView">
+            app:startDestination="@id/deviceSettingsView">
     <fragment
             android:id="@+id/availableDevicesView"
             android:name="com.example.reflectit.ui.device.available.list.AvailableDevicesView"
@@ -24,4 +24,7 @@
             android:name="com.example.reflectit.ui.device.available.details.profiles.details.ProfileDetailsView"
             android:label="profile_details_view"
             tools:layout="@layout/profile_details_view"/>
+    <fragment android:id="@+id/deviceSettingsView"
+              android:name="com.example.reflectit.ui.device.available.details.settings.DeviceSettingsView"
+              android:label="device_settings_fragment" tools:layout="@layout/device_settings_fragment"/>
 </navigation>
