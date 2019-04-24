@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.models.RemoteWidgets
-import com.example.reflectit.ui.data.services.Widget
 import kotlinx.android.synthetic.main.widgets_fragment.*
 
 class WidgetsView : Fragment() {
@@ -45,14 +45,21 @@ class WidgetsView : Fragment() {
         viewModel = ViewModelProviders.of(this).get(DeviceSettingsViewModel::class.java)
         // TODO: Use the ViewModel
         bindRecyclerView()
+        setupOkButton()
 
     }
 
+    private fun setupOkButton() {
+        ok_button.setOnClickListener{
+            Navigation.findNavController(it).navigateUp()
+        }
+    }
+
     private fun bindRecyclerView() {
-        val clockRecycler = clocks as RecyclerView
-        val calendarRecycler = calendars as RecyclerView
-        val weatherRecycler = weather as RecyclerView
-        val musicRecycler = music as RecyclerView
+        val clockRecycler = clocksList as RecyclerView
+        val calendarRecycler = calendarsList as RecyclerView
+        val weatherRecycler = weatherList as RecyclerView
+        val musicRecycler = musicList as RecyclerView
 
         clockRecycler.layoutManager= LinearLayoutManager(this.context, LinearLayout.HORIZONTAL, false)
         clockRecycler.adapter=clocksAdapter
@@ -65,7 +72,6 @@ class WidgetsView : Fragment() {
 
         musicRecycler.layoutManager= LinearLayoutManager(this.context, LinearLayout.HORIZONTAL, false)
         musicRecycler.adapter=musicAdapter
-
 
     }
 

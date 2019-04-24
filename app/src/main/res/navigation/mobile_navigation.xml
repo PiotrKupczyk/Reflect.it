@@ -26,5 +26,10 @@
             tools:layout="@layout/profile_details_view"/>
     <fragment android:id="@+id/deviceSettingsView"
               android:name="com.example.reflectit.ui.device.available.details.settings.DeviceSettingsView"
-              android:label="device_settings_fragment" tools:layout="@layout/device_settings_fragment"/>
+              android:label="device_settings_fragment" tools:layout="@layout/device_settings_fragment">
+        <action android:id="@+id/action_deviceSettingsView_to_widgetsView" app:destination="@id/widgetsView"/>
+    </fragment>
+    <fragment android:id="@+id/widgetsView"
+              android:name="com.example.reflectit.ui.device.available.details.settings.WidgetsView"
+              android:label="widgets_fragment" tools:layout="@layout/widgets_fragment"/>
 </navigation>
