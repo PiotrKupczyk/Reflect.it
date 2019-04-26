@@ -6,6 +6,11 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="mainActivityTitle">Znalezione lustra w sieci</string>
     <string name="scanButton">Skanuj</string>
-    <string name="defaultMirrorName"> Lustro </string>
+    <string name="defaultMirrorName">Lustro</string>
     <string name="hostUrl"/>
+    <string name="clocksLabel">Zegary</string>
+    <string name="calendarsLabel">Kalendarze</string>
+    <string name="weatherLabel">Pogoda</string>
+    <string name="musicLabel">Muzyka</string>
+
 </resources>
