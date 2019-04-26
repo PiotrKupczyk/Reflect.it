@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.net.nsd.NsdManager
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,7 @@ class AvailableDevicesView : Fragment() {
         val recyclerView = mirrorsList as RecyclerView
         val mirrorAdapter = MirrorAdapter(mirrorList) { ip, port ->
 
-            val hostnameSharedPref = this.context?.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE)!!
+            val hostnameSharedPref = PreferenceManager.getDefaultSharedPreferences(context)
             hostnameSharedPref.edit {
                 this.putString(Constant.HOSTNAMEKEY, "$ip:$port")
                 apply()

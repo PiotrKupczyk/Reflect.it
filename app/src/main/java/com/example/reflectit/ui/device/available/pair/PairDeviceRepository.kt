@@ -3,22 +3,16 @@ package com.example.reflectit.ui.device.available.pair
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.reflectit.ui.data.services.MirrorAuthResponse
-import com.example.reflectit.ui.data.services.MirrorIdResponse
 import com.example.reflectit.ui.data.services.ParingService
-import okhttp3.MediaType
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class PairDeviceRepository(val hostname: String) {
+class PairDeviceRepository(private val hostname: String) {
 
     private val retrofit: Retrofit
-    val paringService: ParingService
+    private val paringService: ParingService
 
     init {
         /*val testLocalHost = "10.0.2.2" //if you use phone use 'localhost' instead
@@ -30,49 +24,51 @@ class PairDeviceRepository(val hostname: String) {
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
 
         paringService = retrofit.create(ParingService::class.java)
     }
 
-    fun pair(code: String): LiveData<String?> { //returns auth token
+    suspend fun pair(code: String): LiveData<String?> { //returns auth token
         val result = MutableLiveData<String?>()
-        val mirrorId = getMirrorId() //TODO getMirrorId is async and we should wait for a result before we call parryingService
-        val call = paringService.parry(code, "any string")
-        call.enqueue(object : Callback<MirrorAuthResponse> {
-            override fun onFailure(call: Call<MirrorAuthResponse>, t: Throwable) {
-                result.postValue(null)
-                Log.d("ERROR 1", "PAIR POST ERROR... ${t.message}")
-            }
+        val deviceId = "any string just for now"
+        val request = paringService.parryAsync(code, deviceId)
+            val response = request.await()
+            if (response.isSuccessful) {
+                val token = response.body()?.token
+                result.postValue(token)
 
-            override fun onResponse(call: Call<MirrorAuthResponse>, response: Response<MirrorAuthResponse>) {
-                if (response.isSuccessful) {
-                    if (response.body()?.status == "success") {
-                        result.postValue(response.body()?.token)
-                    }
-                } else {
-                    result.postValue(null)
-                    Log.d("ERROR 2", "AUTH FAILED!!")
-                }
+//                withContext(Dispatchers.Main) {
+//                }
             }
-        })
         return result
     }
 
-    fun getMirrorId(): String {
+    suspend fun getMirrorId(): String? {
         var mirrorId = ""
-        val call = paringService.getMirrorId()
-        call.enqueue(object : Callback<MirrorIdResponse> {
-            override fun onFailure(call: Call<MirrorIdResponse>, t: Throwable) {
-                Log.d("ERROR", "PAIR GET ID ERROR... ${t.message}")
-            }
+        val request = paringService.getMirrorIdAsync()
 
-            override fun onResponse(call: Call<MirrorIdResponse>, response: Response<MirrorIdResponse>) {
-                mirrorId = response.body()?.id!!
-                Log.d("ok", response.body()?.id!!)
-            }
-
-        })
-        return mirrorId
+        return runBlocking {
+            val response = request.await()
+            return@runBlocking if (response.isSuccessful) {
+                response.body()?.id!!
+            } else
+                null
+        }
     }
+
+
+//        call.enqueue(object : Callback<MirrorIdResponse> {
+//            override fun onFailure(call: Call<MirrorIdResponse>, t: Throwable) {
+//                Log.d("ERROR", "PAIR GET ID ERROR... ${t.message}")
+//            }
+//
+//            override fun onResponse(call: Call<MirrorIdResponse>, response: Response<MirrorIdResponse>) {
+//                mirrorId = response.body()?.id!!
+//                Log.d("ok", response.body()?.id!!)
+//            }
+//
+//        })
+//        return mirrorId
 }

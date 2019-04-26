@@ -7,9 +7,10 @@ import retrofit2.http.Query
 
 data class Widget(@SerializedName("id") val id: Int,
                   @SerializedName("name") val name: String,
-                  @SerializedName("category") val category: String,
-                  @SerializedName("imgUrl") val imageUrl: String,
-                  @SerializedName("config") val config: Config)
+                  @SerializedName("category") val category: String
+//                  @SerializedName("imgUrl") val imageUrl: String,
+//                  @SerializedName("config") val config: Config
+)
 
 data class Config(@SerializedName("name") val name: String,
                   @SerializedName("type") val type: FieldType,
@@ -20,13 +21,14 @@ data class Config(@SerializedName("name") val name: String,
 enum class FieldType(type: String) {
     GoogleApiKey("googleApiKey"),
     InputText("input-text"),
-    InputPassword("input-password")
+    InputPassword("input-password"),
+    MockType("input-password")
 }
 
 
 interface WidgetsService {
     @GET("mirror/widgets/all")
-    fun getAllWidgets(): Call<List<Widget>> //TODO not sure if there shouldn't be Array<Widget>
+    fun getAllWidgets(): Call<List<Widget>>
 
     @GET("mirror/widgets/details")
     fun getWidgetById(@Query(value = "id") id: String): Call<Widget>
