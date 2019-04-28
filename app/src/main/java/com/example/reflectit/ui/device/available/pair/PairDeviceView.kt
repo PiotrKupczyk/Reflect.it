@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.edit
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.launch
@@ -67,6 +68,8 @@ class PairDeviceView : Fragment() {
         val hostname = sharedPreferences?.getString(Constant.HOSTNAMEKEY, "")
         viewModel = ViewModelProviders.of(this, PairDeviceViewModelFactory(PairDeviceRepository(hostname!!)))
             .get(PairDeviceViewModel::class.java)
+        val textViewHost = view?.findViewById<TextView>(R.id.ipTextView)
+        textViewHost?.text = hostname
     }
 
 

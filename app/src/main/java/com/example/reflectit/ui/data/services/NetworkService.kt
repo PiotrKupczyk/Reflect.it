@@ -5,12 +5,12 @@ import android.net.nsd.NsdServiceInfo
 import java.net.InetAddress
 
 object NetworkService {
-    private const val SERVICE_TYPE = "_smartmirror._tcp."
+    private const val SERVICE_TYPE = "_http._tcp"
 //    private const val SERVICE_TYPE = "_services._dns-sd._udp"
-    private const val SERVICE_NAME = "SmartMirror"
+    private const val SERVICE_NAME = "smartmirror"
 
     fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
-//        registerService(manager, 5000)
+        //registerService(manager, 5000)
         manager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
                 manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
@@ -53,8 +53,8 @@ object NetworkService {
         val serviceInfo = NsdServiceInfo().apply {
             // The name is subject to change based on conflicts
             // with other services advertised on the same network.
-            serviceName = "SmartMirror"
-            serviceType = "_smartmirror._tcp."
+            serviceName = SERVICE_NAME
+            serviceType = SERVICE_TYPE
             setPort(port)
         }
         manager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, object : NsdManager.RegistrationListener {
