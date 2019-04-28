@@ -1,37 +1,37 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:2:1-8:12
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:2:1-8:12
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:2:1-8:12
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:2:1-8:12
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:2:1-8:12
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:2:1-8:12
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:2:1-8:12
+ADDED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:2:1-8:12
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:2:1-8:12
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:2:1-8:12
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:2:1-8:12
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:2:1-8:12
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:2:1-8:12
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:2:1-8:12
 	package
-		ADDED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:3:11-44
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
+		ADDED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:3:11-44
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
 	android:versionName
-		ADDED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:5:11-36
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
+		ADDED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:5:11-36
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:2:11-69
+		ADDED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml:4:11-34
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
+		ADDED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml:4:11-34
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
 uses-sdk
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-		ADDED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+		ADDED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-		ADDED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
-		INJECTED from D:\AndroidProjects\Reflect_it\app\libs\dynamicgrid\AndroidManifest.xml
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+		ADDED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml
+		INJECTED from /Users/piotrkupczyk/AndroidStudioProjects/Reflectit/app/libs/dynamicgrid/AndroidManifest.xml

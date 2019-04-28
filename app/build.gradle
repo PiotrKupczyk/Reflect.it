@@ -10,6 +10,7 @@ apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.example.reflectit"
         minSdkVersion 21

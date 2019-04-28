@@ -11,7 +11,7 @@ import com.example.reflectit.ui.device.available.list.MirrorAdapter
 
 class WidgetAdapter(var widgets: ArrayList<RemoteWidgets>) : RecyclerView.Adapter<WidgetAdapter.WidgetHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WidgetAdapter.WidgetHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WidgetHolder {
         val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.grid_item, parent, false)
         return WidgetHolder(inflatedView)
     }
@@ -19,7 +19,7 @@ class WidgetAdapter(var widgets: ArrayList<RemoteWidgets>) : RecyclerView.Adapte
     override fun getItemCount() = widgets.size
 
 
-    override fun onBindViewHolder(holder: WidgetAdapter.WidgetHolder, position: Int) {
+    override fun onBindViewHolder(holder: WidgetHolder, position: Int) {
         //TODO przypisac image do imageView
     }
 

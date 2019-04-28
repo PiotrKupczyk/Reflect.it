@@ -1,8 +1,5 @@
 package com.example.reflectit.ui.device.available.pair
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.reflectit.ui.data.services.ParingService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.*
@@ -15,12 +12,12 @@ class PairDeviceRepository(private val hostname: String) {
     private val paringService: ParingService
 
     init {
-        /*val testLocalHost = "10.0.2.2" //if you use phone use 'localhost' instead
+        val testLocalHost = "10.0.2.2" //if you use phone use 'localhost' instead
         val port = "5000"
-        val baseUrl = "http://$testLocalHost:$port/mirror/"*/
+        val baseUrl = "http://$testLocalHost:$port/mirror/"
         //Don't remove it /\/\/\/\/\
 
-        val baseUrl = "http://$hostname/mirror/"
+//        val baseUrl = "http://$hostname/mirror/"
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -30,19 +27,14 @@ class PairDeviceRepository(private val hostname: String) {
         paringService = retrofit.create(ParingService::class.java)
     }
 
-    suspend fun pair(code: String): LiveData<String?> { //returns auth token
-        val result = MutableLiveData<String?>()
+    suspend fun pair(code: String): String? { //returns auth token
         val deviceId = "any string just for now"
         val request = paringService.parryAsync(code, deviceId)
             val response = request.await()
             if (response.isSuccessful) {
-                val token = response.body()?.token
-                result.postValue(token)
-
-//                withContext(Dispatchers.Main) {
-//                }
+                return response.body()?.token
             }
-        return result
+        return null
     }
 
     suspend fun getMirrorId(): String? {

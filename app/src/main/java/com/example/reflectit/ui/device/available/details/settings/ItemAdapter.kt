@@ -41,7 +41,7 @@ internal class ItemAdapter(
         return mItemList[position].id.toLong()
     }
 
-    internal inner class ViewHolder(itemView: View) :
+    internal inner class ViewHolder(itemView: View):
         DragItemAdapter.ViewHolder(itemView, mGrabHandleId, mDragOnLongPress) {
 
         var gridImage= itemView.findViewById(R.id.gridImage) as (ImageView)

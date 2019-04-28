@@ -12,10 +12,9 @@ class PairDeviceViewModel(private val repository: PairDeviceRepository) : ViewMo
 
 
     fun pairDevice(code: String): LiveData<String?> {
-//        CoroutineScope(Dispatchers.Default).launch
-         return runBlocking {
-             return@runBlocking repository.pair(code)
-        }
+        val result = MutableLiveData<String?>()
+        CoroutineScope(Dispatchers.Default).launch { result.postValue(repository.pair(code)) }
+        return result
     }
 
 }
