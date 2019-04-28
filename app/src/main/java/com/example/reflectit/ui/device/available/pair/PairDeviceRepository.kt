@@ -17,7 +17,11 @@ class PairDeviceRepository(private val hostname: String) {
         val baseUrl = "http://$testLocalHost:$port/mirror/"
         //Don't remove it /\/\/\/\/\
 
+<<<<<<< HEAD
 //        val baseUrl = "http://$hostname/mirror/"
+=======
+        val baseUrl = "http:/$hostname/mirror/"
+>>>>>>> b346b7283bcc8de716f455e8c94d018f3d1a2eb2
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

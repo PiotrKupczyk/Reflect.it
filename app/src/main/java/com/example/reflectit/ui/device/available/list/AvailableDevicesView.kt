@@ -7,22 +7,29 @@ import android.net.nsd.NsdManager
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.core.content.edit
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.models.Mirror
+import com.example.reflectit.ui.data.services.NetworkService
 import com.example.reflectit.ui.extensions.Constant
-import kotlinx.android.synthetic.main.available_devices_fragment.mirrorsList;
+import com.example.reflectit.ui.extensions.append
+import kotlinx.android.synthetic.main.available_devices_fragment.*
+import java.net.InetAddress
 
-class AvailableDevicesView : Fragment() {
+@SuppressLint("ValidFragment")
+class AvailableDevicesView  : Fragment() {
 
     var mirrorList = ArrayList<Mirror>()
 
@@ -49,6 +56,17 @@ class AvailableDevicesView : Fragment() {
         ).get(AvailableDevicesViewModel::class.java)
 
         bindRecyclerView()
+        val btn_click_me = view?.findViewById(R.id.button_scan) as Button;
+        btn_click_me.setOnClickListener {
+            val manager = context?.getSystemService(Context.NSD_SERVICE);
+            val availableDevices = MutableLiveData<ArrayList<Mirror>>()
+            NetworkService.discoverServices(manager as NsdManager) { inetAddress: InetAddress, port: Int ->
+                //TODO: call api to get mirror specific data such as GUID
+                availableDevices.append(Mirror(inetAddress, port))
+                println("Mirror posted")
+            }
+            Log.d("pairdevice", "aaaaaaaaaaassssssssaaaa")
+        };
     }
 
     @SuppressLint("WrongConstant")
