@@ -1,23 +1,23 @@
-package com.example.reflectit.ui.device.available.details.settings
+package com.example.reflectit.ui.device.available.details.widgets.current
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import com.example.reflectit.R
-import com.example.reflectit.ui.data.models.RemoteWidgets
+import com.example.reflectit.ui.data.models.RemoteWidget
+import com.example.reflectit.ui.data.services.Widget
 import com.woxthebox.draglistview.DragItemAdapter
 import java.util.ArrayList
 
 internal class ItemAdapter(
-    list: ArrayList<RemoteWidgets>,
+    list: ArrayList<Widget>,
     private val mLayoutId: Int,
     private val mGrabHandleId: Int,
     private val mDragOnLongPress: Boolean
-) : DragItemAdapter<RemoteWidgets, ItemAdapter.ViewHolder>() {
+) : DragItemAdapter<Widget, ItemAdapter.ViewHolder>() {
 
     init {
         itemList = list
@@ -32,8 +32,7 @@ internal class ItemAdapter(
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
 
-        val id = mItemList[position].image
-        holder.gridImage.setImageResource(id)
+        val id = mItemList[position].imageUrl
         holder.itemView.tag = mItemList[position]
     }
 

@@ -19,47 +19,47 @@ class ProfileDetailsRepository {
         .build()
         .create(WidgetsService::class.java)
 
-    fun getAllWidgets(): LiveData<List<Widget>> {
-        val widgets = MutableLiveData<List<Widget>>()
-        retrofit.getAllWidgets().enqueue(
-            object: Callback<List<Widget>> {
-                override fun onFailure(call: Call<List<Widget>>, t: Throwable) {
-                    throw t
-                }
-
-                override fun onResponse(call: Call<List<Widget>>, response: Response<List<Widget>>) {
-                    if (response.isSuccessful) {
-                        widgets.postValue(response.body())
-                        Log.d("R", "Fetched widgets")
-                    } else {
-                        Log.d("R", "Response isn't successful")
-                        throw Throwable("Response isn't successful")
-                    }
-                }
-            }
-        )
-        return widgets
-    }
-
-    fun getWidget(id: Int): LiveData<Widget> {
-        val widget = MutableLiveData<Widget>()
-        retrofit.getWidgetById(id.toString()).enqueue(
-            object: Callback<Widget> {
-                override fun onFailure(call: Call<Widget>, t: Throwable) {
-                    throw t
-                }
-
-                override fun onResponse(call: Call<Widget>, response: Response<Widget>) {
-                    if (response.isSuccessful) {
-                        widget.postValue(response.body())
-                        Log.d("R", "Fetched widget with id: $id")
-                    } else {
-                        Log.d("R", "Response isn't successful")
-                        throw Throwable("Response isn't successful")
-                    }
-                }
-            }
-        )
-        return widget
-    }
+//    fun getAllWidgets(): LiveData<List<Widget>> {
+//        val widgets = MutableLiveData<List<Widget>>()
+//        retrofit.getAllWidgetsAsync().enqueue(
+//            object: Callback<List<Widget>> {
+//                override fun onFailure(call: Call<List<Widget>>, t: Throwable) {
+//                    throw t
+//                }
+//
+//                override fun onResponse(call: Call<List<Widget>>, response: Response<List<Widget>>) {
+//                    if (response.isSuccessful) {
+//                        widgets.postValue(response.body())
+//                        Log.d("R", "Fetched widgets")
+//                    } else {
+//                        Log.d("R", "Response isn't successful")
+//                        throw Throwable("Response isn't successful")
+//                    }
+//                }
+//            }
+//        )
+//        return widgets
+//    }
+//
+//    fun getWidget(id: Int): LiveData<Widget> {
+//        val widget = MutableLiveData<Widget>()
+//        retrofit.getWidgetByIdAsync(id.toString()).enqueue(
+//            object: Callback<Widget> {
+//                override fun onFailure(call: Call<Widget>, t: Throwable) {
+//                    throw t
+//                }
+//
+//                override fun onResponse(call: Call<Widget>, response: Response<Widget>) {
+//                    if (response.isSuccessful) {
+//                        widget.postValue(response.body())
+//                        Log.d("R", "Fetched widget with id: $id")
+//                    } else {
+//                        Log.d("R", "Response isn't successful")
+//                        throw Throwable("Response isn't successful")
+//                    }
+//                }
+//            }
+//        )
+//        return widget
+//    }
 }

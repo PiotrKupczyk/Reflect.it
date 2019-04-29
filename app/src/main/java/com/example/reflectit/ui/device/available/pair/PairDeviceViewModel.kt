@@ -10,7 +10,6 @@ import kotlinx.coroutines.runBlocking
 
 class PairDeviceViewModel(private val repository: PairDeviceRepository) : ViewModel() {
 
-
     fun pairDevice(code: String): LiveData<String?> {
         val result = MutableLiveData<String?>()
         CoroutineScope(Dispatchers.Default).launch { result.postValue(repository.pair(code)) }

@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.models.Mirror
 
-class MirrorAdapter(private var mirrors: ArrayList<Mirror>, val cellOnClickHandler: (ip: String, port: String) -> Unit) : RecyclerView.Adapter<MirrorAdapter.MirrorHolder>() {
+class MirrorAdapter(private var mirrors: ArrayList<Mirror>,
+                    val cellOnClickHandler: (ip: String, port: String) -> Unit) : RecyclerView.Adapter<MirrorAdapter.MirrorHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MirrorHolder {
         val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.mirror_item, parent, false)

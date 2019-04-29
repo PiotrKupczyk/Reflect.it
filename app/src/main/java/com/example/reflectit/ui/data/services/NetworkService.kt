@@ -10,11 +10,7 @@ object NetworkService {
     private const val SERVICE_NAME = "smartmirror"
 
     fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
-<<<<<<< HEAD
-        registerService(manager, 5000)
-=======
-        //registerService(manager, 5000)
->>>>>>> b346b7283bcc8de716f455e8c94d018f3d1a2eb2
+
         manager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
                 manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))

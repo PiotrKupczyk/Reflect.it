@@ -54,7 +54,7 @@ class PairDeviceView : Fragment() {
                             this.putString(Constant.TOKEN, token)
                             apply()
                         }
-                        val navAction = PairDeviceViewDirections.actionPairDeviceViewToDeviceSettingsView()
+                        val navAction = PairDeviceViewDirections.actionPairDeviceViewToWidgetsPositioner()
                         Navigation.findNavController(this@PairDeviceView.view!!).navigate(navAction)
                     } else { //handle auth error here
 
@@ -68,8 +68,6 @@ class PairDeviceView : Fragment() {
         val hostname = sharedPreferences?.getString(Constant.HOSTNAMEKEY, "")
         viewModel = ViewModelProviders.of(this, PairDeviceViewModelFactory(PairDeviceRepository(hostname!!)))
             .get(PairDeviceViewModel::class.java)
-        val textViewHost = view?.findViewById<TextView>(R.id.ipTextView)
-        textViewHost?.text = hostname
     }
 
 

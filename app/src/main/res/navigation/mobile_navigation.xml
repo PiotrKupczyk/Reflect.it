@@ -16,20 +16,26 @@
         <argument android:name="mirrorIp" app:argType="string"/>
         <argument android:name="mirrorPort" app:argType="string"/>
         <action
-                android:id="@+id/action_pairDeviceView_to_deviceSettingsView"
-                app:destination="@id/deviceSettingsView"/>
+                android:id="@+id/action_pairDeviceView_to_widgetsPositioner"
+                app:destination="@id/widgetsPositionView"/>
     </fragment>
     <fragment
             android:id="@+id/profileDetailsView"
             android:name="com.example.reflectit.ui.device.available.details.profiles.details.ProfileDetailsView"
             android:label="profile_details_view"
             tools:layout="@layout/profile_details_view"/>
-    <fragment android:id="@+id/deviceSettingsView"
-              android:name="com.example.reflectit.ui.device.available.details.settings.DeviceSettingsView"
-              android:label="device_settings_fragment" tools:layout="@layout/device_settings_fragment">
-        <action android:id="@+id/action_deviceSettingsView_to_widgetsView" app:destination="@id/widgetsView"/>
+    <fragment
+            android:name="com.example.reflectit.ui.device.available.details.widgets.current.WidgetsPositionView"
+            android:label="device_settings_fragment"
+            tools:layout="@layout/device_settings_fragment"
+            android:id="@+id/widgetsPositionView">
+        <action
+                android:id="@+id/action_deviceSettingsView_to_widgetsView"
+                app:destination="@id/widgetsSelectorView"/>
     </fragment>
-    <fragment android:id="@+id/widgetsView"
-              android:name="com.example.reflectit.ui.device.available.details.settings.WidgetsView"
-              android:label="widgets_fragment" tools:layout="@layout/widgets_fragment"/>
+    <fragment
+            android:id="@+id/widgetsSelectorView"
+            android:name="com.example.reflectit.ui.device.available.details.widgets.select.WidgetsSelectorView"
+            android:label="widgets_fragment"
+            tools:layout="@layout/widgets_fragment"/>
 </navigation>

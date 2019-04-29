@@ -73,4 +73,6 @@ dependencies {
     implementation project(':dynamicgrid')
     //dragable grid
     implementation 'com.github.woxthebox:draglistview:1.6.3'
+    //grouped recycler view
+    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:2.0.0'
 }
