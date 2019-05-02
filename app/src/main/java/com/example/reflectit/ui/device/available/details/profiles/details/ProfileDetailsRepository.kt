@@ -43,7 +43,7 @@ class ProfileDetailsRepository {
 //
 //    fun getWidget(id: Int): LiveData<Widget> {
 //        val widget = MutableLiveData<Widget>()
-//        retrofit.getWidgetByIdAsync(id.toString()).enqueue(
+//        retrofit.getWidgetDetailsAsync(id.toString()).enqueue(
 //            object: Callback<Widget> {
 //                override fun onFailure(call: Call<Widget>, t: Throwable) {
 //                    throw t

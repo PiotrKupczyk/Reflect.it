@@ -73,7 +73,7 @@ class WidgetsSelectorView : Fragment() {
                 sectionAdapter.addSection(
                     widgetType.name.toUpperCase(),
                     WidgetsSection(widgetType.name.toUpperCase(),
-                        widgets.filter { it.category == widgetType.name.toLowerCase() }
+                        widgets.filter { it.category.name == widgetType.name.toLowerCase() }
                     ) {
                         viewModel.selectWidget(it)
                     }
