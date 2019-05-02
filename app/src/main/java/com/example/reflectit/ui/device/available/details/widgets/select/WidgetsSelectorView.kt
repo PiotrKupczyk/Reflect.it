@@ -69,11 +69,11 @@ class WidgetsSelectorView : Fragment() {
     private fun bindRecyclerView() {
         val sectionAdapter = SectionedRecyclerViewAdapter()
         viewModel.loadWidgets().observe(this, Observer { widgets ->
-            WidgetCategory.values().forEach { widgetType ->
+            WidgetCategory.values().forEach { widgetCategory ->
                 sectionAdapter.addSection(
-                    widgetType.name.toUpperCase(),
-                    WidgetsSection(widgetType.name.toUpperCase(),
-                        widgets.filter { it.category.name == widgetType.name.toLowerCase() }
+                    widgetCategory.name,
+                    WidgetsSection(widgetCategory.name.toUpperCase(),
+                        widgets.filter { it.category == widgetCategory }
                     ) {
                         viewModel.selectWidget(it)
                     }

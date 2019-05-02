@@ -84,6 +84,7 @@ interface WidgetsService {
 //            val testLocalHost = "10.0.2.2" //if you use phone use 'localhost' instead
 //            val port = "5000"
 //            val baseUrl = "http://$testLocalHost:$port/mirror/"
+            //TODO change baseUrl
             val baseUrl = "http://$hostname/mirror/"
             return Retrofit.Builder()
                 .baseUrl(baseUrl)

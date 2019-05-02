@@ -18,23 +18,24 @@ class SharedWidgetsSelectorViewModel(val repository: WidgetsRepository) : ViewMo
 
     fun loadWidgets(): LiveData<ArrayList<Widget>> {
         val result = MutableLiveData<ArrayList<Widget>>()
-        GlobalScope.launch { val widgets = repository.getAllWidgets()
+
+        CoroutineScope(Dispatchers.Default).launch {
+            val widgets = repository.getAllWidgets()
             if (widgets != null) {
                 result.postValue(ArrayList(widgets))
-            } }
-//        CoroutineScope(Dispatchers.Main).launch {
-//
-//        }
+            }
+        }
+
         return result
     }
 
     fun updateCurrentConfiguration() {
         val configurations = mutableListOf<WidgetSetup>()
-        val positions = listOf("top_left, bottom_left, top_right, bottom_right")
+        //TODO send correct configuration
         selectedWidgets.value?.forEach { widget ->
             configurations.add(WidgetSetup(widget.name, position = Position.TopLeft))
         }
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.Default).launch {
             val code = repository.updateConfiguration(configurations)
         }
     }

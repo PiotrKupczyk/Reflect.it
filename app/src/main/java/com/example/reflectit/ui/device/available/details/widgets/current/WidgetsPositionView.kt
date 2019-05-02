@@ -42,9 +42,9 @@ class WidgetsPositionView : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupViewModel()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        // TODO: Use the ViewModel
+
+        setupViewModel()
         setupGridRecyclerView()
         setupAddButton()
 
@@ -53,6 +53,7 @@ class WidgetsPositionView : Fragment() {
     private fun setupViewModel() {
         val baseUrl = sharedPreferences?.getString(Constant.HOSTNAMEKEY, "") ?: ""
         val token = sharedPreferences?.getString(Constant.TOKEN, "") ?: ""
+
         viewModel = activity?.run {
             ViewModelProviders.of(this,
                 SharedWidgetsSelectorViewModelFactory(WidgetsRepository(baseUrl, token))
