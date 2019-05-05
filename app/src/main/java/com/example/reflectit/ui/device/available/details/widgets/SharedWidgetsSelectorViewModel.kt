@@ -1,5 +1,6 @@
 package com.example.reflectit.ui.device.available.details.widgets
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
@@ -54,13 +55,20 @@ class SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository) 
                         -1 }
                 ?.filter {it != -1}
                 ?.map {
+                    val configurations = mutableListOf<Config>()
                     val widget = selectedWidgets.value!![it]
-                    val position = Position.getPositionByIndex(it)!!
-                    WidgetSetup(widget.name, position = position )
+                    if (widget.category == WidgetCategory.Weather) { // just for now
+//                        Config()
+//                        configurations.add()
+                    }
+                    val position = Position.getPositionByIndex(it) ?: Position.TopLeft
+//                    val position = Position.TopLeft
+                    WidgetSetup(widget.name, position = position)
                 }
             if (configurations != null) {
                 CoroutineScope(Dispatchers.Default).launch {
                     val code = repository.updateConfiguration(configurations)
+                    Log.d("WIDGET SERVICE", code.toString())
                 }
             } else return
         } else return

@@ -50,28 +50,28 @@ enum class FieldType {
 }
 
 enum class Position {
-    @SerializedName("top-left")
+    @SerializedName("top_left")
     TopLeft,
-    @SerializedName("top-center")
+    @SerializedName("top_center")
     TopCenter,
-    @SerializedName("top-right")
+    @SerializedName("top_right")
     TopRight,
-    @SerializedName("bottom-left")
+    @SerializedName("bottom_left")
     BottomLeft,
-    @SerializedName("bottom-center")
+    @SerializedName("bottom_center")
     BottomCenter,
-    @SerializedName("bottom-right")
+    @SerializedName("bottom_right")
     BottomRight;
 
     companion object {
         fun getPositionByIndex(index: Int): Position? {
             return when (index) {
-                1 -> TopLeft
-                2 -> TopCenter
-                3 -> TopRight
-                7 -> BottomLeft
-                8 -> BottomCenter
-                9 -> BottomRight
+                0 -> TopLeft
+                1 -> TopCenter
+                2 -> TopRight
+                6 -> BottomLeft
+                7 -> BottomCenter
+                8 -> BottomRight
                 else -> null
             }
         }
@@ -82,8 +82,8 @@ interface WidgetsService {
     @GET("Widgets")
     fun getAllWidgetsAsync(): Deferred<Response<List<Widget>>>
 
-    @GET("Widgets")
-    fun getWidgetDetailsAsync(@Query(value = "id") id: String): Deferred<Response<WidgetDetails>>
+    @GET("Widgets/{id}")
+    fun getWidgetDetailsAsync(@Path(value = "id") id: String): Deferred<Response<WidgetDetails>>
 
     @FormUrlEncoded
     @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
@@ -104,9 +104,9 @@ interface WidgetsService {
             }
             val testLocalHost = "10.0.2.2" //if you use phone use 'localhost' instead
             val port = "5000"
-            val baseUrl = "http://$testLocalHost:$port/mirror/"
+//            val baseUrl = "http://$testLocalHost:$port/mirror/"
             //TODO change baseUrl
-//            val baseUrl = "http://$hostname/mirror/"
+            val baseUrl = "http://$hostname/mirror/"
             return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(okHttpClientBuilder.build())

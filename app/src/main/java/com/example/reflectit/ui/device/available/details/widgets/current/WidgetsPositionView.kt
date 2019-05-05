@@ -49,7 +49,6 @@ class WidgetsPositionView : Fragment() {
         setupGridRecyclerView()
 
         setupAddButton()
-
     }
 
     private fun setupViewModel() {
@@ -65,7 +64,6 @@ class WidgetsPositionView : Fragment() {
 
         viewModel.selectedWidgets.observe(this, Observer { widgets ->
             widgetsPositionRecyclerView.adapter?.notifyDataSetChanged()
-//            viewModel.updateCurrentConfiguration()
             Log.d("G", widgets.toString())
         })
     }
@@ -100,7 +98,8 @@ class WidgetsPositionView : Fragment() {
         add_button.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.widgetsSelectorView)
         }
+        sendButton.setOnClickListener {
+            viewModel.updateCurrentConfiguration()
+        }
     }
-
 }
-

@@ -10,7 +10,7 @@ import java.net.InetAddress
 class AvailableDevicesRepository(private val manager: NsdManager) {
     private val availableDevices = MutableLiveData<ArrayList<Mirror>>()
     fun getAvailableDevices(): LiveData<ArrayList<Mirror>> {
-        NetworkService.registerService(manager, 5005)
+//        NetworkService.registerService(manager, 5005)
         NetworkService.discoverServices(manager) { inetAddress: InetAddress, port: Int ->
             //TODO: call api to get mirror specific data such as GUID
             availableDevices.appendAsync(Mirror(inetAddress, port))

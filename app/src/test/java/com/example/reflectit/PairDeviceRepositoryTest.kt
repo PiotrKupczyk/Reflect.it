@@ -6,16 +6,16 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class PairDeviceRepositoryTest {
-    private val paringCode = "679910"
+    private val paringCode = "444055"
     private val deviceId = "any string"
-    private val hostname = "localhost:5000"
+    private val hostname = "192.168.0.185:5000"
     private val pairRepositoryMock = PairDeviceRepository(hostname)
 
     @Test
     fun pairDeviceWithCorrectCode() {
         var token: String? = null
         runBlocking {
-            token = pairRepositoryMock.pair("679910")
+            token = pairRepositoryMock.pair(paringCode)
         }
         assertEquals(true, token != null)
     }

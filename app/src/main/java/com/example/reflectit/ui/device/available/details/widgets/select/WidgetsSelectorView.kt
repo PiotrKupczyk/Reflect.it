@@ -82,6 +82,7 @@ class WidgetsSelectorView : Fragment() {
                     WidgetsSection(widgetCategory.name.toUpperCase(),
                         widgets.filter { it.category == widgetCategory }
                     ) {
+                        viewModel.selectWidget(it)
                         navigateToWidgetParametersProvider(it.id)
                     }
                 )
@@ -106,7 +107,8 @@ class WidgetsSelectorView : Fragment() {
 //            .graph
 //            .findNode(R.id.widgetParametersProviderView)
 //            ?.addArgument("widgetId", navArgument)
-        Navigation.findNavController(this.view!!).navigate(R.id.widgetParametersProviderView, bundle)
+//        Navigation.findNavController(this.view!!).navigate(R.id.widgetParametersProviderView, bundle)
+//        Navigation.findNavController(this.view!!).navigateUp()
     }
 }
 

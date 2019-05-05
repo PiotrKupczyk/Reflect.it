@@ -33,11 +33,7 @@
             android:id="@+id/widgetsSelectorView"
             android:name="com.example.reflectit.ui.device.available.details.widgets.select.WidgetsSelectorView"
             android:label="widgets_fragment"
-            tools:layout="@layout/widgets_fragment">
-        <action
-                android:id="@+id/action_widgetsSelectorView_to_widgetParametersProviderView"
-                app:destination="@id/widgetParametersProviderView"/>
-    </fragment>
+            tools:layout="@layout/widgets_fragment"/>
     <fragment
             android:id="@+id/widgetParametersProviderView"
             android:name="com.example.reflectit.ui.device.available.details.widgets.select.parameters.WidgetParametersProviderView"

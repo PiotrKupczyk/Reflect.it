@@ -18,8 +18,9 @@ class WidgetsRepository(hostname: String, private val token: String) {
     }
 
     suspend fun updateConfiguration(configurations: List<WidgetSetup>): Int? {
-        val gson = GsonBuilder().create()
-        val request = widgetService.sendConfigurationAsync(gson.toJson(configurations))
+        val gson = GsonBuilder().setPrettyPrinting().create()
+        val config = gson.toJson(configurations)
+        val request = widgetService.sendConfigurationAsync(config)
         val response = request.await()
         return response.code()
     }

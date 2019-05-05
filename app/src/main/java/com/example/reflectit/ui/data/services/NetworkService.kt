@@ -5,7 +5,7 @@ import android.net.nsd.NsdServiceInfo
 import java.net.InetAddress
 
 object NetworkService {
-    private const val SERVICE_TYPE = "_http._tcp"
+    private const val SERVICE_TYPE = "_http._tcp."
 //    private const val SERVICE_TYPE = "_services._dns-sd._udp"
     private const val SERVICE_NAME = "smartmirror"
 
@@ -13,14 +13,15 @@ object NetworkService {
 
         manager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
-                manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
-//                if (!serviceInfo?.serviceType.equals(SERVICE_TYPE)) {
-//                    println("Unknown Service FieldType: " + serviceInfo?.serviceType);
-//                } else if (serviceInfo?.serviceName.equals(SERVICE_NAME)) {
+//                manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
+                if (!serviceInfo?.serviceType.equals(SERVICE_TYPE)) {
+                    println("Unknown Service FieldType: " + serviceInfo?.serviceType);
+                }
+//                else if (serviceInfo?.serviceName.equals(SERVICE_NAME)) {
 //                    println("Same machine: $SERVICE_NAME");
-//                } else if (serviceInfo?.serviceName!!.contains(SERVICE_NAME)) {
-//                    manager.resolveService(serviceInfo, resolveListener)
-//                }
+                 else if (serviceInfo?.serviceName!!.contains(SERVICE_NAME)) {
+                    manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
+                }
             }
 
             override fun onStopDiscoveryFailed(serviceType: String?, errorCode: Int) {
