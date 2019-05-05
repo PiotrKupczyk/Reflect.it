@@ -50,24 +50,44 @@ enum class FieldType {
 }
 
 enum class Position {
-    @SerializedName("top-left") TopLeft,
-    @SerializedName("top-center") TopCenter,
-    @SerializedName("top-right") TopRight,
-    @SerializedName("bottom-left") BottomLeft,
-    @SerializedName("bottom-center") BottomCenter,
-    @SerializedName("bottom-right") BottomRight
+    @SerializedName("top-left")
+    TopLeft,
+    @SerializedName("top-center")
+    TopCenter,
+    @SerializedName("top-right")
+    TopRight,
+    @SerializedName("bottom-left")
+    BottomLeft,
+    @SerializedName("bottom-center")
+    BottomCenter,
+    @SerializedName("bottom-right")
+    BottomRight;
+
+    companion object {
+        fun getPositionByIndex(index: Int): Position? {
+            return when (index) {
+                1 -> TopLeft
+                2 -> TopCenter
+                3 -> TopRight
+                7 -> BottomLeft
+                8 -> BottomCenter
+                9 -> BottomRight
+                else -> null
+            }
+        }
+    }
 }
 
 interface WidgetsService {
-    @GET("widgets/all")
+    @GET("Widgets")
     fun getAllWidgetsAsync(): Deferred<Response<List<Widget>>>
 
-    @GET("widgets/details")
+    @GET("Widgets")
     fun getWidgetDetailsAsync(@Query(value = "id") id: String): Deferred<Response<WidgetDetails>>
 
     @FormUrlEncoded
     @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
-    @POST("widgets/updateConfiguration")
+    @PUT("Widgets")
     fun sendConfigurationAsync(@Field("configuration") configuration: String): Deferred<Response<Void>>
 
 
@@ -84,9 +104,9 @@ interface WidgetsService {
             }
             val testLocalHost = "10.0.2.2" //if you use phone use 'localhost' instead
             val port = "5000"
-            val baseUrl = "http://$testLocalHost:$port/mirror/"
+//            val baseUrl = "http://$testLocalHost:$port/mirror/"
             //TODO change baseUrl
-//            val baseUrl = "http://$hostname/mirror/"
+            val baseUrl = "http://$hostname/mirror/"
             return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(okHttpClientBuilder.build())

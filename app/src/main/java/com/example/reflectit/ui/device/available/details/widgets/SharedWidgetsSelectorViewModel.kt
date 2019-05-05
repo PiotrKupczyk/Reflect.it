@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.reflectit.ui.data.services.WidgetSetup
 import com.example.reflectit.ui.data.services.Position
 import com.example.reflectit.ui.data.services.Widget
+import com.example.reflectit.ui.data.services.WidgetCategory
 import com.example.reflectit.ui.extensions.appendAsync
 import kotlinx.coroutines.*
 
@@ -32,13 +33,26 @@ class SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository) 
     }
 
     fun updateCurrentConfiguration() {
-        val configurations = mutableListOf<Widget>()
+        if (selectedWidgets.value != null)  {
+            val configurations = selectedWidgets
+                .value
+                ?.mapIndexed { index, widget ->
+                    if (widget.category != WidgetCategory.Placeholder) {
+                        index
+                    } else
+                        -1 }
+                ?.filter {it != -1}
+                ?.map {
+                    val widget = selectedWidgets.value!![it]
+                    val position = Position.getPositionByIndex(it)!!
+                    WidgetSetup(widget.name, position = position )
+                }
+            if (configurations != null) {
+                CoroutineScope(Dispatchers.Default).launch {
+                    val code = repository.updateConfiguration(configurations)
+                }
+            } else return
+        } else return
         //TODO send correct configuration
-        selectedWidgets.value?.forEach {
-            configurations.add(it)
-        }
-        CoroutineScope(Dispatchers.Default).launch {
-//            val code = repository.updateConfiguration(configurations)
-        }
     }
 }
