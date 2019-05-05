@@ -12,5 +12,7 @@
     <string name="calendarsLabel">Kalendarze</string>
     <string name="weatherLabel">Pogoda</string>
     <string name="musicLabel">Muzyka</string>
+    <string name="wrongPin">Nieprawidlowy PIN</string>
+    <string name="searchMirrors">Znajdz lustra</string>
 
 </resources>
