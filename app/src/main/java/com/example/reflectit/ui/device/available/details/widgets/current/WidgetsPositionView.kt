@@ -52,11 +52,6 @@ class WidgetsPositionView : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
     private fun setupViewModel() {
         val baseUrl = sharedPreferences?.getString(Constant.HOSTNAMEKEY, "") ?: ""
         val token = sharedPreferences?.getString(Constant.TOKEN, "") ?: ""

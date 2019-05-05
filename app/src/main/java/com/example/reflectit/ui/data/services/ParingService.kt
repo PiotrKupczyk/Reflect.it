@@ -28,13 +28,13 @@ interface ParingService {
 
     @FormUrlEncoded
     @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
-    @POST("device/parry")
+    @POST("device/Parry")
     fun parryAsync(
         @Field("parryingCode") parryingCode: String,
         @Field("deviceIdentificator") deviceIdentificator: String
     ): Deferred<Response<MirrorAuthResponse>>
 
-    @GET("device/id")
+    @GET("Device/id")
     fun getMirrorIdAsync(): Deferred<Response<MirrorIdResponse>>
 
     companion object {
