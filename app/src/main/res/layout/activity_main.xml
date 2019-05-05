@@ -4,7 +4,8 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".ui.MainActivity">
+                                                   tools:context=".ui.MainActivity"
+                                                   android:background="@color/colorPrimary">
 
     <include
             android:id="@+id/toolbar"
@@ -19,6 +20,5 @@
             app:defaultNavHost="true"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
