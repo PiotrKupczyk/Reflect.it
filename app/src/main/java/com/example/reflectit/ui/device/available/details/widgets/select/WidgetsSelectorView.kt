@@ -52,6 +52,7 @@ class WidgetsSelectorView : Fragment() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val hostname = sharedPreferences?.getString(Constant.HOSTNAMEKEY, "") ?: ""
         val token = sharedPreferences?.getString(Constant.TOKEN, "") ?: ""
+
         viewModel = activity?.run {
             ViewModelProviders.of(
                 this,
@@ -62,6 +63,8 @@ class WidgetsSelectorView : Fragment() {
 
     private fun setupOkButton() {
         ok_button.setOnClickListener {
+            val currentValue = viewModel.selectedWidgets.value
+            viewModel.selectedWidgets.postValue(ArrayList(currentValue!!.fillWithPlaceholders(9-currentValue.size)))
             Navigation.findNavController(it).navigateUp()
         }
     }
@@ -85,8 +88,15 @@ class WidgetsSelectorView : Fragment() {
 
         val recyclerView = widgetsRecyclerView
         recyclerView?.layoutManager = LinearLayoutManager(this.context)
-        widgetsRecyclerView?.adapter = sectionAdapter
+        recyclerView.adapter = sectionAdapter
 
     }
+}
+
+fun MutableCollection<Widget>.fillWithPlaceholders(howMany: Int): MutableCollection<Widget> {
+    val result = this.filter { it.category != WidgetCategory.Placeholder }.toMutableList()
+    for (i in 0..howMany)
+        result.add(result.lastIndex+1, Widget(i+10, "empty", WidgetCategory.Placeholder, ""))
+    return result
 }
 

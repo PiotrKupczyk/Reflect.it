@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/item_layout"
-                android:orientation="vertical"
+<!-- for itemView -->
+<!--<FrameLayout-->
+<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="56dp">-->
+
+<!--&lt;!&ndash; Content View(s) &ndash;&gt;-->
+<!---->
+<!--&lt;!&ndash; Drag handle &ndash;&gt;-->
+<!--<View-->
+<!--android:id="@+id/drag_handle"-->
+<!--android:layout_width="32dp"-->
+<!--android:layout_height="match_parent" />-->
+<!--</FrameLayout>-->
+
+
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:layout_margin="4dp">
+
+    <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            tools:ignore="UselessParent"
+            android:focusable="true">
+
+        <ImageView
+                android:id="@+id/widgetImageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-    <ImageView
-            android:id="@+id/gridImage"
-            android:layout_width="140dp"
-            android:layout_height="90dp"/>
-</RelativeLayout>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:contentDescription="TODO"
+                tools:srcCompat="@tools:sample/avatars"/>
+
+    </FrameLayout>
+</FrameLayout>

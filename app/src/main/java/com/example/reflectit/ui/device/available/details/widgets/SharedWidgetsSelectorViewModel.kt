@@ -9,11 +9,13 @@ import com.example.reflectit.ui.data.services.Widget
 import com.example.reflectit.ui.extensions.appendAsync
 import kotlinx.coroutines.*
 
-class SharedWidgetsSelectorViewModel(val repository: WidgetsRepository) : ViewModel() {
-    val selectedWidgets = MutableLiveData<ArrayList<Widget>>()
+//class WidgetPosition(val widget: Widget, val position: Position? = null)
 
-    fun selectWidget(widget: Widget) {
-        selectedWidgets.appendAsync(widget)
+class SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository) : ViewModel() {
+    val selectedWidgets = MutableLiveData<ArrayList<Widget>>().apply { postValue(arrayListOf()) }
+
+    fun selectWidget(element: Widget) {
+        selectedWidgets.appendAsync(element)
     }
 
     fun loadWidgets(): LiveData<ArrayList<Widget>> {
@@ -30,13 +32,13 @@ class SharedWidgetsSelectorViewModel(val repository: WidgetsRepository) : ViewMo
     }
 
     fun updateCurrentConfiguration() {
-        val configurations = mutableListOf<WidgetSetup>()
+        val configurations = mutableListOf<Widget>()
         //TODO send correct configuration
-        selectedWidgets.value?.forEach { widget ->
-            configurations.add(WidgetSetup(widget.name, position = Position.TopLeft))
+        selectedWidgets.value?.forEach {
+            configurations.add(it)
         }
         CoroutineScope(Dispatchers.Default).launch {
-            val code = repository.updateConfiguration(configurations)
+//            val code = repository.updateConfiguration(configurations)
         }
     }
 }

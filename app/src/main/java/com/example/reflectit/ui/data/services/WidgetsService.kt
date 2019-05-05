@@ -40,7 +40,8 @@ data class Config(
 enum class WidgetCategory {
     @SerializedName("weather") Weather,
     @SerializedName("info") Info,
-    @SerializedName("time") Time
+    @SerializedName("time") Time,
+    Placeholder
 }
 
 enum class FieldType {
@@ -81,11 +82,11 @@ interface WidgetsService {
 
                 it.proceed(request)
             }
-//            val testLocalHost = "10.0.2.2" //if you use phone use 'localhost' instead
-//            val port = "5000"
-//            val baseUrl = "http://$testLocalHost:$port/mirror/"
+            val testLocalHost = "10.0.2.2" //if you use phone use 'localhost' instead
+            val port = "5000"
+            val baseUrl = "http://$testLocalHost:$port/mirror/"
             //TODO change baseUrl
-            val baseUrl = "http://$hostname/mirror/"
+//            val baseUrl = "http://$hostname/mirror/"
             return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(okHttpClientBuilder.build())

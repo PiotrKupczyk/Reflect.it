@@ -70,9 +70,12 @@ dependencies {
     //pin libary
     implementation 'com.github.GoodieBag:Pinview:v1.3'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation project(':dynamicgrid')
-    //dragable grid
-    implementation 'com.github.woxthebox:draglistview:1.6.3'
+    //draggable recyclerView
+    implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
     //grouped recycler view
     implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:2.0.0'
+    //img from URL
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+
 }

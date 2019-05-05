@@ -11,16 +11,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.RecyclerView
+import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
+import WidgetGridAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.services.Widget
+import com.example.reflectit.ui.data.services.WidgetCategory
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModel
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModelFactory
 import com.example.reflectit.ui.device.available.details.widgets.WidgetsRepository
 import com.example.reflectit.ui.extensions.Constant
 import kotlinx.android.synthetic.main.device_settings_fragment.*
-import kotlinx.android.synthetic.main.widgets_fragment.*
 
 
 class WidgetsPositionView : Fragment() {
@@ -43,10 +45,15 @@ class WidgetsPositionView : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
         setupViewModel()
         setupGridRecyclerView()
+
         setupAddButton()
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
     }
 
@@ -55,33 +62,43 @@ class WidgetsPositionView : Fragment() {
         val token = sharedPreferences?.getString(Constant.TOKEN, "") ?: ""
 
         viewModel = activity?.run {
-            ViewModelProviders.of(this,
+            ViewModelProviders.of(
+                this,
                 SharedWidgetsSelectorViewModelFactory(WidgetsRepository(baseUrl, token))
             ).get(SharedWidgetsSelectorViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         viewModel.selectedWidgets.observe(this, Observer { widgets ->
-            drag_list_view.adapter.notifyDataSetChanged()
-            viewModel.updateCurrentConfiguration()
+            widgetsPositionRecyclerView.adapter?.notifyDataSetChanged()
+//            viewModel.updateCurrentConfiguration()
             Log.d("G", widgets.toString())
-            //handle selected widget
         })
     }
 
 
     private fun setupGridRecyclerView() {
-        val dragListView = drag_list_view
-        dragListView.setLayoutManager(GridLayoutManager(context, 3))
-        val listAdapter = ItemAdapter(
-            viewModel.selectedWidgets.value ?: arrayListOf(),
-            R.layout.grid_item,
-            R.id.item_layout,
-            true
+        val recyclerView = view?.findViewById(R.id.widgetsPositionRecyclerView) as RecyclerView
+
+        val adapter = WidgetGridAdapter(
+            viewModel.selectedWidgets.value ?: mutableListOf(), this.context
         )
-        dragListView.setAdapter(listAdapter, true)
-        dragListView.setCanDragHorizontally(true)
-        dragListView.setCustomDragItem(null)
-        dragListView.setScrollingEnabled(false)
+
+
+        val dragDropManager = RecyclerViewDragDropManager()
+        val wrappedAdapter = dragDropManager.createWrappedAdapter(adapter)
+
+
+        recyclerView.adapter = wrappedAdapter
+        recyclerView.layoutManager = object: GridLayoutManager(this.context, 3, RecyclerView.VERTICAL, false) {
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+//        recyclerView.layoutManager = LinearLayoutManager(this.context)
+
+//        (widgetsRecyclerView.itemAnimator as SimpleItemAnimator)
+        dragDropManager.setInitiateOnTouch(true)
+        dragDropManager.attachRecyclerView(recyclerView)
     }
 
     private fun setupAddButton() {
@@ -91,5 +108,4 @@ class WidgetsPositionView : Fragment() {
     }
 
 }
-
 
