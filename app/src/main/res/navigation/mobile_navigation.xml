@@ -17,13 +17,9 @@
         <argument android:name="mirrorPort" app:argType="string"/>
         <action
                 android:id="@+id/action_pairDeviceView_to_widgetsPositioner"
-                app:destination="@id/widgetsPositionView"/>
+                app:destination="@id/widgetsPositionView"
+                app:popUpTo="@+id/availableDevicesView"/>
     </fragment>
-    <fragment
-            android:id="@+id/profileDetailsView"
-            android:name="com.example.reflectit.ui.device.available.details.profiles.details.ProfileDetailsView"
-            android:label="profile_details_view"
-            tools:layout="@layout/profile_details_view"/>
     <fragment
             android:name="com.example.reflectit.ui.device.available.details.widgets.current.WidgetsPositionView"
             android:label="device_settings_fragment"
@@ -37,5 +33,18 @@
             android:id="@+id/widgetsSelectorView"
             android:name="com.example.reflectit.ui.device.available.details.widgets.select.WidgetsSelectorView"
             android:label="widgets_fragment"
-            tools:layout="@layout/widgets_fragment"/>
+            tools:layout="@layout/widgets_fragment">
+        <action
+                android:id="@+id/action_widgetsSelectorView_to_widgetParametersProviderView"
+                app:destination="@id/widgetParametersProviderView"/>
+    </fragment>
+    <fragment
+            android:id="@+id/widgetParametersProviderView"
+            android:name="com.example.reflectit.ui.device.available.details.widgets.select.parameters.WidgetParametersProviderView"
+            android:label="widget_parameters_provider_fragment"
+            tools:layout="@layout/widget_parameters_provider_fragment">
+        <argument
+                android:name="widgetId"
+                app:argType="integer"/>
+    </fragment>
 </navigation>

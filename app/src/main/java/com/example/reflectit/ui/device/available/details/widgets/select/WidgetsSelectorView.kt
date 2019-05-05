@@ -8,10 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.NavArgument
+import androidx.navigation.NavDestination
+import androidx.navigation.NavType
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.services.Widget
 import com.example.reflectit.ui.data.services.WidgetCategory
@@ -71,14 +75,14 @@ class WidgetsSelectorView : Fragment() {
 
     private fun bindRecyclerView() {
         val sectionAdapter = SectionedRecyclerViewAdapter()
-        viewModel.loadWidgets().observe(this, Observer { widgets ->
+        viewModel.getAllWidgets().observe(this, Observer { widgets ->
             WidgetCategory.values().forEach { widgetCategory ->
                 sectionAdapter.addSection(
                     widgetCategory.name,
                     WidgetsSection(widgetCategory.name.toUpperCase(),
                         widgets.filter { it.category == widgetCategory }
                     ) {
-                        viewModel.selectWidget(it)
+                        navigateToWidgetParametersProvider(it.id)
                     }
                 )
             }
@@ -90,6 +94,19 @@ class WidgetsSelectorView : Fragment() {
         recyclerView?.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = sectionAdapter
 
+    }
+
+    private fun navigateToWidgetParametersProvider(widgetId: Int) {
+        val bundle = bundleOf("widgetId" to widgetId)
+//        val navArgument = NavArgument.Builder()
+//            .setType(NavType.IntType)
+//            .setDefaultValue(widgetId)
+//            .build()
+//        val navDestination = findNavController()
+//            .graph
+//            .findNode(R.id.widgetParametersProviderView)
+//            ?.addArgument("widgetId", navArgument)
+        Navigation.findNavController(this.view!!).navigate(R.id.widgetParametersProviderView, bundle)
     }
 }
 
