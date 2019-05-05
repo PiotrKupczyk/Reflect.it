@@ -1,9 +1,6 @@
 package com.example.reflectit
 
-import com.example.reflectit.ui.data.services.WidgetSetup
-import com.example.reflectit.ui.data.services.Position
-import com.example.reflectit.ui.data.services.Widget
-import com.example.reflectit.ui.data.services.WidgetDetails
+import com.example.reflectit.ui.data.services.*
 import com.example.reflectit.ui.device.available.details.widgets.WidgetsRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -12,9 +9,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class WidgetsRepositoryTest {
-    private val hostname = "192.168.0.185:5000"
+    private val hostname = "localhost:5000"
     private val tokenMock =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NTcwODUzNzcsImV4cCI6MTU1NzE3MTc3NywiaWF0IjoxNTU3MDg1Mzc3fQ.QjwQYTL6pTZUsXEClxYDr6j3gy4nQGojRt-4SUu3skU"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InFzZGFkIiwibmJmIjoxNTU3MDg4NzI0LCJleHAiOjE1NTcxNzUxMjQsImlhdCI6MTU1NzA4ODcyNH0.0T-ygNxOtqICbWmXwXT51w96EqVD5N7J_g1-DgJSq7Q"
     private val widgetsRepository = WidgetsRepository(hostname, tokenMock)
 
     @Test
@@ -29,8 +26,17 @@ class WidgetsRepositoryTest {
 
     @Test
     fun updateConfiguration() {
+        val config = mutableMapOf<String, String>()
+        val widget = Widget(4, "weatherforecast", WidgetCategory.Weather, "")
+        val position = Position.getPositionByIndex(-3) ?: Position.TopLeft
+        if (widget.category == WidgetCategory.Weather) { // just for now
+            config["location"] = "Wrocław,PL"
+            config["locationID"] = "3081368"
+            config["appid"] = "b81b05eb2425dcea5e92cadc30df5721"
+        }
         val configurationMock = listOf(
-            WidgetSetup("clock", position = Position.TopLeft)
+            WidgetSetup("clock", position = Position.TopLeft),
+                    WidgetSetup(widget.name, position = position, config = config)
 //            WidgetSetup("clock", position = Position.BottomLeft)
         )
         var statusCode: Int? = 0
@@ -49,10 +55,5 @@ class WidgetsRepositoryTest {
             println(response)
         }
         assertEquals(true, response != null)
-    }
-
-    fun gsonTest() {
-        val gson = GsonBuilder().create()
-        gson.toJson(mapOf(Pair("", 1)))
     }
 }

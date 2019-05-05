@@ -1,11 +1,9 @@
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.reflectit.R
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
@@ -58,7 +56,7 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdapter.Companion.MyViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.grid_item, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.widgets_position_row, parent, false)
         return MyAdapter.Companion.MyViewHolder(v)
     }
 
@@ -71,7 +69,7 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
             GlideApp
                 .with(holder.imageView.context)
                 .load(selectedWidgets[position].imageUrl)
-                .centerInside()
+                .fitCenter()
                 .placeholder(R.drawable.mirror_image)
                 .into(holder.imageView)
         }

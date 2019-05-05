@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.reflectit.ui.data.services.*
 import com.example.reflectit.ui.extensions.appendAsync
 import kotlinx.coroutines.*
+import java.io.Serializable
 
 //class WidgetPosition(val widget: Widget, val position: Position? = null)
 
@@ -55,15 +56,15 @@ class SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository) 
                         -1 }
                 ?.filter {it != -1}
                 ?.map {
-                    val configurations = mutableListOf<Config>()
+                    val config = mutableMapOf<String, Any>()
                     val widget = selectedWidgets.value!![it]
-                    if (widget.category == WidgetCategory.Weather) { // just for now
-//                        Config()
-//                        configurations.add()
-                    }
                     val position = Position.getPositionByIndex(it) ?: Position.TopLeft
-//                    val position = Position.TopLeft
-                    WidgetSetup(widget.name, position = position)
+                    if (widget.name == "weatherforecast") { // just for now
+                        config["location"] = "Wrocław,PL"
+                        config["locationID"] = "3081368"
+                        config["appid"] = "b81b05eb2425dcea5e92cadc30df5721"
+                    }
+                    WidgetSetup(widget.name, position = position, config = config)
                 }
             if (configurations != null) {
                 CoroutineScope(Dispatchers.Default).launch {

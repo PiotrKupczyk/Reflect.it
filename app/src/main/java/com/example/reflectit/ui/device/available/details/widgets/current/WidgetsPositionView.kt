@@ -16,13 +16,11 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import WidgetGridAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.reflectit.R
-import com.example.reflectit.ui.data.services.Widget
-import com.example.reflectit.ui.data.services.WidgetCategory
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModel
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModelFactory
 import com.example.reflectit.ui.device.available.details.widgets.WidgetsRepository
 import com.example.reflectit.ui.extensions.Constant
-import kotlinx.android.synthetic.main.device_settings_fragment.*
+import kotlinx.android.synthetic.main.widgets_position_fragment.*
 
 
 class WidgetsPositionView : Fragment() {
@@ -39,7 +37,7 @@ class WidgetsPositionView : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.device_settings_fragment, container, false)
+        return inflater.inflate(R.layout.widgets_position_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

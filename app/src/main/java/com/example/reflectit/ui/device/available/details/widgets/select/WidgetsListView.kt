@@ -10,11 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import androidx.navigation.NavArgument
-import androidx.navigation.NavDestination
-import androidx.navigation.NavType
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.services.Widget
@@ -24,7 +20,7 @@ import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSe
 import com.example.reflectit.ui.device.available.details.widgets.WidgetsRepository
 import com.example.reflectit.ui.extensions.Constant
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
-import kotlinx.android.synthetic.main.widgets_fragment.*
+import kotlinx.android.synthetic.main.widgets_list_fragment.*
 
 class WidgetsSelectorView : Fragment() {
 
@@ -40,7 +36,7 @@ class WidgetsSelectorView : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.widgets_fragment, container, false)
+        return inflater.inflate(R.layout.widgets_list_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -68,7 +64,7 @@ class WidgetsSelectorView : Fragment() {
     private fun setupOkButton() {
         ok_button.setOnClickListener {
             val currentValue = viewModel.selectedWidgets.value
-            viewModel.selectedWidgets.postValue(ArrayList(currentValue!!.fillWithPlaceholders(9-currentValue.size)))
+            viewModel.selectedWidgets.postValue(ArrayList(currentValue!!.fillWithPlaceholders(9 - currentValue.size)))
             Navigation.findNavController(it).navigateUp()
         }
     }
@@ -76,17 +72,17 @@ class WidgetsSelectorView : Fragment() {
     private fun bindRecyclerView() {
         val sectionAdapter = SectionedRecyclerViewAdapter()
         viewModel.getAllWidgets().observe(this, Observer { widgets ->
-            WidgetCategory.values().forEach { widgetCategory ->
-                sectionAdapter.addSection(
-                    widgetCategory.name,
-                    WidgetsSection(widgetCategory.name.toUpperCase(),
-                        widgets.filter { it.category == widgetCategory }
-                    ) {
-                        viewModel.selectWidget(it)
-                        navigateToWidgetParametersProvider(it.id)
-                    }
-                )
-            }
+            WidgetCategory.values()
+                .filter { it != WidgetCategory.Placeholder }
+                .forEach { widgetCategory -> //iterate thought categories
+                    sectionAdapter.addSection(widgetCategory.name, //set section header to category name
+                        WidgetsSectionAdapter(widgetCategory.name.toUpperCase(), widgets.filter { it.category == widgetCategory }
+                        ) {
+                            viewModel.selectWidget(it)
+                            navigateToWidgetParametersProvider(it.id)
+                        }
+                    )
+                }
             widgetsRecyclerView?.adapter = sectionAdapter
             (widgetsRecyclerView.adapter as SectionedRecyclerViewAdapter).notifyDataSetChanged()
         })
@@ -115,7 +111,7 @@ class WidgetsSelectorView : Fragment() {
 fun MutableCollection<Widget>.fillWithPlaceholders(howMany: Int): MutableCollection<Widget> {
     val result = this.filter { it.category != WidgetCategory.Placeholder }.toMutableList()
     for (i in 0..howMany)
-        result.add(result.lastIndex+1, Widget(i+10, "empty", WidgetCategory.Placeholder, ""))
+        result.add(result.lastIndex + 1, Widget(i + 10, "empty", WidgetCategory.Placeholder, ""))
     return result
 }
 

@@ -23,7 +23,7 @@
     <fragment
             android:name="com.example.reflectit.ui.device.available.details.widgets.current.WidgetsPositionView"
             android:label="device_settings_fragment"
-            tools:layout="@layout/device_settings_fragment"
+            tools:layout="@layout/widgets_position_fragment"
             android:id="@+id/widgetsPositionView">
         <action
                 android:id="@+id/action_deviceSettingsView_to_widgetsView"
@@ -33,7 +33,7 @@
             android:id="@+id/widgetsSelectorView"
             android:name="com.example.reflectit.ui.device.available.details.widgets.select.WidgetsSelectorView"
             android:label="widgets_fragment"
-            tools:layout="@layout/widgets_fragment"/>
+            tools:layout="@layout/widgets_list_fragment"/>
     <fragment
             android:id="@+id/widgetParametersProviderView"
             android:name="com.example.reflectit.ui.device.available.details.widgets.select.parameters.WidgetParametersProviderView"

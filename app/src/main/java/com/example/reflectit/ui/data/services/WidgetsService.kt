@@ -28,7 +28,7 @@ data class WidgetSetup(
     @SerializedName("header") val header: String? = "",
     @SerializedName("disabled") val isDisabled: Boolean = false,
     @SerializedName("position") val position: Position = Position.TopLeft,
-    @SerializedName("config") val config: List<Config> = emptyList()
+    @SerializedName("config") val config: Map<String, Any> = emptyMap()
 )
 
 data class Config(
