@@ -19,10 +19,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.models.Mirror
 import com.example.reflectit.ui.extensions.Constant
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.available_devices_fragment.*
+import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar.toolbar
 
 @SuppressLint("ValidFragment")
-class AvailableDevicesView  : Fragment() {
+class AvailableDevicesView : Fragment() {
 
     var mirrorList = ArrayList<Mirror>()
 
@@ -47,6 +50,9 @@ class AvailableDevicesView  : Fragment() {
             this,
             AvailableDevicesViewModelFactory(AvailableDevicesRepository(context?.getSystemService(Context.NSD_SERVICE) as NsdManager))
         ).get(AvailableDevicesViewModel::class.java)
+
+        activity?.toolbar?.setTitle(R.string.availableMirrors)
+
 
         bindRecyclerView()
 //        val btn_click_me = view?.findViewById(R.id.button_scan) as Button;

@@ -21,6 +21,7 @@ import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSe
 import com.example.reflectit.ui.device.available.details.widgets.WidgetsRepository
 import com.example.reflectit.ui.extensions.Constant
 import kotlinx.android.synthetic.main.widgets_position_fragment.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 
 class WidgetsPositionView : Fragment() {
@@ -43,6 +44,8 @@ class WidgetsPositionView : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        activity?.toolbar?.setTitle(R.string.yourMirror)
+
         setupViewModel()
         setupGridRecyclerView()
 
@@ -80,7 +83,7 @@ class WidgetsPositionView : Fragment() {
 
 
         recyclerView.adapter = wrappedAdapter
-        recyclerView.layoutManager = object: GridLayoutManager(this.context, 3, RecyclerView.VERTICAL, false) {
+        recyclerView.layoutManager = object : GridLayoutManager(this.context, 3, RecyclerView.VERTICAL, false) {
             override fun canScrollVertically(): Boolean {
                 return false
             }

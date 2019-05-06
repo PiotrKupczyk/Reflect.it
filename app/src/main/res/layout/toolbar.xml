@@ -6,6 +6,7 @@
         android:id="@+id/toolbar"
         android:background="@color/colorPrimary"
         app:titleTextColor="@color/white"
-        app:title="@string/app_name">
+        app:title="@string/app_name"
+        android:theme="@style/ToolabrTheme">
 
 </androidx.appcompat.widget.Toolbar>
