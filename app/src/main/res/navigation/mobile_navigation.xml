@@ -9,7 +9,12 @@
             android:name="com.example.reflectit.ui.device.available.list.AvailableDevicesView"
             android:label="available_devices_fragment"
             tools:layout="@layout/available_devices_fragment">
-        <action android:id="@+id/action_pair" app:destination="@+id/pairDeviceView"/>
+        <action android:id="@+id/action_pair" app:destination="@+id/pairDeviceView"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
     </fragment>
     <fragment android:id="@+id/pairDeviceView" android:name="com.example.reflectit.ui.device.available.pair.PairDeviceView"
               android:label="pair_device_fragment" tools:layout="@layout/pair_device_fragment">
@@ -18,7 +23,9 @@
         <action
                 android:id="@+id/action_pairDeviceView_to_widgetsPositioner"
                 app:destination="@id/widgetsPositionView"
-                app:popUpTo="@+id/availableDevicesView"/>
+                app:popUpTo="@+id/availableDevicesView" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
             android:name="com.example.reflectit.ui.device.available.details.widgets.current.WidgetsPositionView"
@@ -27,7 +34,9 @@
             android:id="@+id/widgetsPositionView">
         <action
                 android:id="@+id/action_deviceSettingsView_to_widgetsView"
-                app:destination="@id/widgetsSelectorView"/>
+                app:destination="@id/widgetsSelectorView" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
             android:id="@+id/widgetsSelectorView"
@@ -36,7 +45,9 @@
             tools:layout="@layout/widgets_fragment">
         <action
                 android:id="@+id/action_widgetsSelectorView_to_widgetParametersProviderView"
-                app:destination="@id/widgetParametersProviderView"/>
+                app:destination="@id/widgetParametersProviderView" app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
             android:id="@+id/widgetParametersProviderView"

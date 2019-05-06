@@ -31,8 +31,7 @@ import kotlinx.coroutines.runBlocking
 import com.example.reflectit.ui.device.available.list.AvailableDevicesViewDirections as AvailableDevicesViewDirections1
 import android.content.Context.INPUT_METHOD_SERVICE
 import androidx.core.content.ContextCompat.getSystemService
-
-
+import kotlinx.android.synthetic.main.toolbar.*
 
 
 class PairDeviceView : Fragment() {
@@ -56,12 +55,15 @@ class PairDeviceView : Fragment() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         initViewModel()
         bindPinView()
+        activity?.toolbar?.setTitle(R.string.pair)
+
     }
 
     override fun onResume() {
         super.onResume()
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+
     }
 
     override fun onPause() {

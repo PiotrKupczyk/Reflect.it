@@ -24,6 +24,7 @@ import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSe
 import com.example.reflectit.ui.device.available.details.widgets.WidgetsRepository
 import com.example.reflectit.ui.extensions.Constant
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
+import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.widgets_fragment.*
 
 class WidgetsSelectorView : Fragment() {
@@ -45,6 +46,7 @@ class WidgetsSelectorView : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        activity?.toolbar?.setTitle(R.string.widgets)
         initViewModel()
         // TODO: Use the ViewModel
         bindRecyclerView()

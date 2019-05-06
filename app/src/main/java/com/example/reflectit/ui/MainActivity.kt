@@ -27,9 +27,10 @@ class MainActivity : AppCompatActivity() {
 
 
         NavigationUI.setupActionBarWithNavController(this, navController)
-        supportActionBar!!.setTitle(getString(R.string.mainActivityTitle))
+//        supportActionBar!!.setTitle(getString(R.string.mainActivityTitle))
 
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
