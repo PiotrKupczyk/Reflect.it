@@ -7,8 +7,8 @@
 
 
     <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             app:srcCompat="@drawable/mirror_image"
             android:id="@+id/widgetImage"
             android:layout_marginTop="8dp"
@@ -16,17 +16,15 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
 
     <TextView
             android:text="TextView"
-            android:layout_width="310dp"
+            android:layout_width="wrap_content"
             android:id="@+id/widgetName"
             app:layout_constraintTop_toTopOf="@+id/widgetImage"
             app:layout_constraintBottom_toBottomOf="@+id/widgetImage"
             android:layout_height="75dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toEndOf="@+id/widgetImage"
-            android:layout_marginStart="32dp"/>
+            app:layout_constraintStart_toEndOf="@+id/widgetImage" android:layout_marginStart="32dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
