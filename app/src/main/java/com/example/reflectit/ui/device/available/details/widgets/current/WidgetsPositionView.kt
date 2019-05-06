@@ -16,6 +16,8 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import WidgetGridAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.reflectit.R
+import com.example.reflectit.ui.data.services.Widget
+import com.example.reflectit.ui.data.services.WidgetCategory
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModel
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModelFactory
 import com.example.reflectit.ui.device.available.details.widgets.WidgetsRepository
@@ -40,6 +42,22 @@ class WidgetsPositionView : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.widgets_position_fragment, container, false)
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        if (viewModel.selectedWidgets.value != null) {
+//            val currentValue = viewModel.selectedWidgets.value!!
+//            viewModel.selectedWidgets.postValue(ArrayList(currentValue.fillWithPlaceholders(9-currentValue.size)))
+//        }
+//    }
+
+//    override fun onResume() {
+//        super.onResume()
+//        if (viewModel.selectedWidgets.value != null) {
+//            val currentValue = viewModel.selectedWidgets.value!!
+//            viewModel.selectedWidgets.postValue(ArrayList(currentValue.fillWithPlaceholders(9-currentValue.size)))
+//        }
+//    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -103,4 +121,11 @@ class WidgetsPositionView : Fragment() {
             viewModel.updateCurrentConfiguration()
         }
     }
+}
+
+fun MutableCollection<Widget>.fillWithPlaceholders(howMany: Int): MutableCollection<Widget> {
+    val result = this.filter { it.category != WidgetCategory.Placeholder }.toMutableList()
+    for (i in 0..howMany)
+        result.add(result.lastIndex + 1, Widget(i + 10, "empty", WidgetCategory.Placeholder, ""))
+    return result
 }

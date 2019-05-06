@@ -9,19 +9,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/widgetsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_width="387dp"
+            android:layout_height="598dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
             app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/ok_button"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.075"/>
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/ok_button"/>
 
     <ImageView
             android:id="@+id/ok_button"

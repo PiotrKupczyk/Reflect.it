@@ -18,13 +18,13 @@
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="145dp"
-        android:layout_height="145dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_margin="4dp">
 
     <FrameLayout
             android:id="@+id/container"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
@@ -33,7 +33,7 @@
 
         <ImageView
                 android:id="@+id/widgetImageView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:contentDescription="TODO"

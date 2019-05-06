@@ -33,9 +33,10 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
         val handleHeight = itemView.height
         val handleLeft = itemView.left
         val handleTop = itemView.top
-
-        return x >= handleLeft && x < handleLeft + handleWidth &&
-                y >= handleTop && y < handleTop + handleHeight
+//
+//        return x >= handleLeft && x < handleLeft + handleWidth &&
+//                y >= handleTop && y < handleTop + handleHeight
+        return true
     }
 
     override fun onItemDragStarted(position: Int) {
@@ -61,7 +62,7 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
     }
 
     override fun getItemCount(): Int {
-        return selectedWidgets.size
+        return if(selectedWidgets.size <= 9) { selectedWidgets.size } else 9
     }
 
     override fun onBindViewHolder(holder: MyAdapter.Companion.MyViewHolder, position: Int) {
