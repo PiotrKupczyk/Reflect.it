@@ -28,14 +28,6 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
 
     override fun onCheckCanStartDrag(holder: MyAdapter.Companion.MyViewHolder, position: Int, x: Int, y: Int): Boolean {
         val itemView = holder.itemView
-
-        val handleWidth = itemView.width
-        val handleHeight = itemView.height
-        val handleLeft = itemView.left
-        val handleTop = itemView.top
-//
-//        return x >= handleLeft && x < handleLeft + handleWidth &&
-//                y >= handleTop && y < handleTop + handleHeight
         return holder.imageView.drawable != null
     }
 

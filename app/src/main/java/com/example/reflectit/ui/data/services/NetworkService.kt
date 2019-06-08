@@ -6,12 +6,13 @@ import java.net.InetAddress
 
 object NetworkService {
     private const val SERVICE_TYPE = "_http._tcp."
-//    private const val SERVICE_TYPE = "_services._dns-sd._udp"
+    //    private const val SERVICE_TYPE = "_services._dns-sd._udp"
     private const val SERVICE_NAME = "smartmirror"
 
-    fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
+    var listener: NsdManager.DiscoveryListener? = null
 
-        manager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, object : NsdManager.DiscoveryListener {
+    fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
+        listener = object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
 //                manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
                 if (!serviceInfo?.serviceType.equals(SERVICE_TYPE)) {
@@ -19,7 +20,7 @@ object NetworkService {
                 }
 //                else if (serviceInfo?.serviceName.equals(SERVICE_NAME)) {
 //                    println("Same machine: $SERVICE_NAME");
-                 else if (serviceInfo?.serviceName!!.contains(SERVICE_NAME)) {
+                else if (serviceInfo?.serviceName!!.contains(SERVICE_NAME)) {
                     manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
                 }
             }
@@ -46,7 +47,9 @@ object NetworkService {
             override fun onServiceLost(serviceInfo: NsdServiceInfo?) {
                 println("Lost!!!")
             }
-        })
+        }
+
+        manager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, listener)
     }
 
     fun registerService(manager: NsdManager, port: Int) {
