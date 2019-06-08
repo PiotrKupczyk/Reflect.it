@@ -3,6 +3,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.DrawableUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflectit.R
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
@@ -27,7 +28,6 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
 
     override fun onCheckCanStartDrag(holder: MyAdapter.Companion.MyViewHolder, position: Int, x: Int, y: Int): Boolean {
         val itemView = holder.itemView
-//        val dragHandle = holder.dragHandle
 
         val handleWidth = itemView.width
         val handleHeight = itemView.height
@@ -36,7 +36,7 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
 //
 //        return x >= handleLeft && x < handleLeft + handleWidth &&
 //                y >= handleTop && y < handleTop + handleHeight
-        return true
+        return holder.imageView.drawable != null
     }
 
     override fun onItemDragStarted(position: Int) {
@@ -62,10 +62,21 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
     }
 
     override fun getItemCount(): Int {
-        return if(selectedWidgets.size <= 9) { selectedWidgets.size } else 9
+        return if(selectedWidgets.size <= 11) { selectedWidgets.size } else 11
     }
 
     override fun onBindViewHolder(holder: MyAdapter.Companion.MyViewHolder, position: Int) {
+
+        if (holder.dragState.isUpdated) {
+            val layoutId = when {
+                holder.dragState.isActive -> 0
+                holder.dragState.isDragging -> R.drawable.dragging_state
+                else -> 0
+            }
+
+            holder.itemView.setBackgroundResource(layoutId)
+        }
+
         if (selectedWidgets[position].category != WidgetCategory.Placeholder) {
             GlideApp
                 .with(holder.imageView.context)

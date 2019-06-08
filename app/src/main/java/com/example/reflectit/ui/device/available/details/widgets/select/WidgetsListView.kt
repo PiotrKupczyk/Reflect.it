@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflectit.R
+import com.example.reflectit.ui.data.services.Position
 import com.example.reflectit.ui.data.services.Widget
 import com.example.reflectit.ui.data.services.WidgetCategory
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModel
@@ -67,7 +68,7 @@ class WidgetsSelectorView : Fragment() {
     private fun setupOkButton() {
         ok_button.setOnClickListener {
             val currentValue = viewModel.selectedWidgets.value!!
-            viewModel.selectedWidgets.postValue(ArrayList(currentValue.fillWithPlaceholders(9-currentValue.size)))
+            viewModel.selectedWidgets.postValue(ArrayList(currentValue.fillWithPlaceholders(Position.values().size-currentValue.size)))
 //            val currentValue = viewModel.selectedWidgets.value
 //            viewModel.selectedWidgets.postValue(ArrayList(currentValue!!.fillWithPlaceholders(9 - currentValue.size)))
             Navigation.findNavController(it).navigateUp()
@@ -82,7 +83,7 @@ class WidgetsSelectorView : Fragment() {
                 .forEach { widgetCategory -> //iterate thought categories
                     sectionAdapter.addSection(widgetCategory.name, //set section header to category name
                         WidgetsSectionAdapter(widgetCategory.name.toUpperCase(), widgets.filter { it.category == widgetCategory }
-                        ) {
+                        ) {//on click handler
                             viewModel.selectWidget(it)
                             navigateToWidgetParametersProvider(it.id)
                         }

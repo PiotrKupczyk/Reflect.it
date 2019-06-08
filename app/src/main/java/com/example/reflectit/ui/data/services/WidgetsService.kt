@@ -50,28 +50,43 @@ enum class FieldType {
 }
 
 enum class Position {
+    @SerializedName("top_bar")
+    TopBar,
     @SerializedName("top_left")
     TopLeft,
     @SerializedName("top_center")
     TopCenter,
     @SerializedName("top_right")
     TopRight,
+    @SerializedName("upper_third")
+    UpperThird,
+    @SerializedName("middle_center")
+    MiddleCenter,
+    @SerializedName("lower_third")
+    LowerThird,
     @SerializedName("bottom_left")
     BottomLeft,
     @SerializedName("bottom_center")
     BottomCenter,
     @SerializedName("bottom_right")
-    BottomRight;
+    BottomRight,
+    @SerializedName("bottom_bar")
+    BottomBar;
 
     companion object {
         fun getPositionByIndex(index: Int): Position? {
             return when (index) {
-                0 -> TopLeft
-                1 -> TopCenter
-                2 -> TopRight
-                6 -> BottomLeft
-                7 -> BottomCenter
-                8 -> BottomRight
+                0 -> TopBar
+                1 -> TopLeft
+                2 -> TopCenter
+                3 -> TopRight
+                4 -> UpperThird
+                5 -> MiddleCenter
+                6 -> LowerThird
+                7 -> BottomLeft
+                8 -> BottomCenter
+                9 -> BottomRight
+                10 -> BottomBar
                 else -> null
             }
         }

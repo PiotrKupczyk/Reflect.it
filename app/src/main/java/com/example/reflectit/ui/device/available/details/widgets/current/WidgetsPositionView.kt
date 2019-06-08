@@ -16,6 +16,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import WidgetGridAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.reflectit.R
+import com.example.reflectit.ui.data.services.Position
 import com.example.reflectit.ui.data.services.Widget
 import com.example.reflectit.ui.data.services.WidgetCategory
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModel
@@ -29,6 +30,8 @@ import kotlinx.android.synthetic.main.toolbar.*
 class WidgetsPositionView : Fragment() {
 
     private var sharedPreferences: SharedPreferences? = null
+    private val FULL_SPAN_SIZE = 3
+    private val MIN_SPAN_SIZE = 1
 
     companion object {
         fun newInstance() = WidgetsPositionView()
@@ -101,11 +104,41 @@ class WidgetsPositionView : Fragment() {
 
 
         recyclerView.adapter = wrappedAdapter
-        recyclerView.layoutManager = object : GridLayoutManager(this.context, 3, RecyclerView.VERTICAL, false) {
+
+        val layoutManager = object: GridLayoutManager(this.context, this.FULL_SPAN_SIZE) {
             override fun canScrollVertically(): Boolean {
                 return false
             }
         }
+
+        layoutManager.spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                Log.e("a", "$position")
+                return when {
+                    viewModel.horizontalGridsPositions.contains(position) -> FULL_SPAN_SIZE
+                    else -> MIN_SPAN_SIZE
+                }
+            }
+        }
+
+        recyclerView.layoutManager = layoutManager
+//        recyclerView.layoutManager = object : GridLayoutManager(this.context, this.FULL_SPAN_SIZE, RecyclerView.VERTICAL, false) {
+//            override fun canScrollVertically(): Boolean {
+//                return false
+//            }
+//        }
+
+//            override fun getSpanSizeLookup(): SpanSizeLookup {
+//                return object: GridLayoutManager.SpanSizeLookup() {
+//                    override fun getSpanSize(position: Int): Int {
+//                        Log.e("a", "$position")
+//                        return when {
+//                            viewModel.horizontalGridsPositions.contains(position) -> FULL_SPAN_SIZE
+//                            else -> MIN_SPAN_SIZE
+//                        }
+//                    }
+//                }
+//            }
 //        recyclerView.layoutManager = LinearLayoutManager(this.context)
 
 //        (widgetsRecyclerView.itemAnimator as SimpleItemAnimator)
@@ -126,6 +159,6 @@ class WidgetsPositionView : Fragment() {
 fun MutableCollection<Widget>.fillWithPlaceholders(howMany: Int): MutableCollection<Widget> {
     val result = this.filter { it.category != WidgetCategory.Placeholder }.toMutableList()
     for (i in 0..howMany)
-        result.add(result.lastIndex + 1, Widget(i + 10, "empty", WidgetCategory.Placeholder, ""))
+        result.add(result.lastIndex + 1, Widget(i + Position.values().size, "empty", WidgetCategory.Placeholder, ""))
     return result
 }

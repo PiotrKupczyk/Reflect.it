@@ -14,6 +14,7 @@ import java.io.Serializable
 class SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository) : ViewModel() {
     val selectedWidgets = MutableLiveData<ArrayList<Widget>>().apply { postValue(arrayListOf()) }
 
+    val horizontalGridsPositions = listOf(0, 4, 5, 6, 10)
 
 
     fun selectWidget(element: Widget) {
