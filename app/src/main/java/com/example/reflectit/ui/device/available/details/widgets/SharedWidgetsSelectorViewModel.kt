@@ -11,14 +11,21 @@ import java.io.Serializable
 
 //class WidgetPosition(val widget: Widget, val position: Position? = null)
 
-class SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository) : ViewModel() {
+class  SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository) : ViewModel() {
     val selectedWidgets = MutableLiveData<ArrayList<Widget>>().apply { postValue(arrayListOf()) }
 
     val horizontalGridsPositions = listOf(0, 4, 5, 6, 10)
 
-
     fun selectWidget(element: Widget) {
-        selectedWidgets.appendAsync(element)
+        val currentWidgets = selectedWidgets.value
+
+        val firstIndexToReplace = currentWidgets?.indexOfFirst { it.category == WidgetCategory.Placeholder }
+        if (firstIndexToReplace != null && firstIndexToReplace!=-1) {
+            currentWidgets[firstIndexToReplace] = element
+        } else
+            currentWidgets?.add(element)
+        selectedWidgets.postValue(currentWidgets)
+//        selectedWidgets.appendAsync(element)
     }
 
     fun getWidgetBy(id: String): LiveData<WidgetDetails> {

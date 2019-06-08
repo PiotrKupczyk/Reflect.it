@@ -156,9 +156,3 @@ class WidgetsPositionView : Fragment() {
     }
 }
 
-fun MutableCollection<Widget>.fillWithPlaceholders(howMany: Int): MutableCollection<Widget> {
-    val result = this.filter { it.category != WidgetCategory.Placeholder }.toMutableList()
-    for (i in 0..howMany)
-        result.add(result.lastIndex + 1, Widget(i + Position.values().size, "empty", WidgetCategory.Placeholder, ""))
-    return result
-}

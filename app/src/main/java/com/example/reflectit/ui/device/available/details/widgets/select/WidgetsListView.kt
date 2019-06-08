@@ -19,7 +19,6 @@ import com.example.reflectit.ui.data.services.WidgetCategory
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModel
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModelFactory
 import com.example.reflectit.ui.device.available.details.widgets.WidgetsRepository
-import com.example.reflectit.ui.device.available.details.widgets.current.fillWithPlaceholders
 import com.example.reflectit.ui.extensions.Constant
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.widgets_list_fragment.*
@@ -63,14 +62,12 @@ class WidgetsSelectorView : Fragment() {
                 SharedWidgetsSelectorViewModelFactory(WidgetsRepository(hostname, token))
             ).get(SharedWidgetsSelectorViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
+
+        viewModel.selectedWidgets.value?.fillWithPlaceholders(11)
     }
 
     private fun setupOkButton() {
         ok_button.setOnClickListener {
-            val currentValue = viewModel.selectedWidgets.value!!
-            viewModel.selectedWidgets.postValue(ArrayList(currentValue.fillWithPlaceholders(Position.values().size-currentValue.size)))
-//            val currentValue = viewModel.selectedWidgets.value
-//            viewModel.selectedWidgets.postValue(ArrayList(currentValue!!.fillWithPlaceholders(9 - currentValue.size)))
             Navigation.findNavController(it).navigateUp()
         }
     }
@@ -112,6 +109,13 @@ class WidgetsSelectorView : Fragment() {
 //        Navigation.findNavController(this.view!!).navigate(R.id.widgetParametersProviderView, bundle)
 //        Navigation.findNavController(this.view!!).navigateUp()
     }
+}
+
+fun MutableCollection<Widget>.fillWithPlaceholders(howMany: Int): MutableCollection<Widget> {
+    val result = this.filter { it.category != WidgetCategory.Placeholder }.toMutableList()
+    for (i in 0..howMany)
+        result.add(result.lastIndex + 1, Widget(i + Position.values().size, "empty", WidgetCategory.Placeholder, ""))
+    return result
 }
 
 
