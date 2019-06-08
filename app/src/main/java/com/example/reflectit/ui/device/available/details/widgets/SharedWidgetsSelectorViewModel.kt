@@ -12,8 +12,11 @@ import java.io.Serializable
 //class WidgetPosition(val widget: Widget, val position: Position? = null)
 
 class  SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository) : ViewModel() {
-    val selectedWidgets = MutableLiveData<ArrayList<Widget>>().apply { postValue(arrayListOf()) }
-
+    val selectedWidgets = MutableLiveData<ArrayList<Widget>>()
+        .apply { postValue(
+            (0..11).map {
+                Widget(Position.values().size, "empty", WidgetCategory.Placeholder, "") } as ArrayList<Widget>?)
+         }
     val horizontalGridsPositions = listOf(0, 4, 5, 6, 10)
 
     fun selectWidget(element: Widget) {

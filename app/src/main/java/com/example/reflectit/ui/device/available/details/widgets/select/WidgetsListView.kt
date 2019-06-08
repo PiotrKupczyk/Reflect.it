@@ -63,7 +63,7 @@ class WidgetsSelectorView : Fragment() {
             ).get(SharedWidgetsSelectorViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        viewModel.selectedWidgets.value?.fillWithPlaceholders(11)
+
     }
 
     private fun setupOkButton() {
