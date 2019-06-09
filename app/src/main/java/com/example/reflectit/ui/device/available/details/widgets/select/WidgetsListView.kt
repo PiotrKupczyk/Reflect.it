@@ -13,8 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflectit.R
-import com.example.reflectit.ui.data.services.Position
-import com.example.reflectit.ui.data.services.Widget
 import com.example.reflectit.ui.data.services.WidgetCategory
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModel
 import com.example.reflectit.ui.device.available.details.widgets.SharedWidgetsSelectorViewModelFactory
@@ -77,11 +75,17 @@ class WidgetsSelectorView : Fragment() {
         viewModel.getAllWidgets().observe(this, Observer { widgets ->
             WidgetCategory.values()
                 .filter { it != WidgetCategory.Placeholder }
-                .forEach { widgetCategory -> //iterate thought categories
-                    sectionAdapter.addSection(widgetCategory.name, //set section header to category name
-                        WidgetsSectionAdapter(viewModel.selectedWidgets.value!!, widgetCategory.name.toUpperCase(), widgets.filter { it.category == widgetCategory }
-                        ) {//on click handler
-
+                .forEach { widgetCategory ->
+                    //iterate thought categories
+                    sectionAdapter.addSection(
+                        widgetCategory.name, //set section header tag to category name
+                        WidgetsSectionAdapter(
+                            sectionAdapter = sectionAdapter,
+                            selectedWidgets = viewModel.selectedWidgets.value!!,
+                            title = widgetCategory.name.toUpperCase(),
+                            widgets = widgets.filter { it.category == widgetCategory }
+                        ) {
+                            //on click handler
                             viewModel.selectWidget(it)
                             navigateToWidgetParametersProvider(it.id)
                         }
@@ -110,13 +114,6 @@ class WidgetsSelectorView : Fragment() {
 //        Navigation.findNavController(this.view!!).navigate(R.id.widgetParametersProviderView, bundle)
 //        Navigation.findNavController(this.view!!).navigateUp()
     }
-}
-
-fun MutableCollection<Widget>.fillWithPlaceholders(howMany: Int): MutableCollection<Widget> {
-    val result = this.filter { it.category != WidgetCategory.Placeholder }.toMutableList()
-    for (i in 0..howMany)
-        result.add(result.lastIndex + 1, Widget(i + Position.values().size, "empty", WidgetCategory.Placeholder, ""))
-    return result
 }
 
 

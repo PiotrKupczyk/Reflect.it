@@ -34,8 +34,10 @@
             android:id="@+id/widgetsPositionView">
         <action
                 android:id="@+id/action_deviceSettingsView_to_widgetsView"
-                app:destination="@id/widgetsSelectorView" app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left" app:popEnterAnim="@anim/slide_in_left"
+                app:destination="@+id/widgetsSelectorView"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment

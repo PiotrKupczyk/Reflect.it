@@ -44,10 +44,10 @@ class AvailableDevicesView : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        val applicationContext = activity?.applicationContext
         viewModel = ViewModelProviders.of(
             this,
-            AvailableDevicesViewModelFactory(context?.getSystemService(Context.NSD_SERVICE) as NsdManager)
+            AvailableDevicesViewModelFactory(applicationContext?.getSystemService(Context.NSD_SERVICE) as NsdManager)
         ).get(AvailableDevicesViewModel::class.java)
 
         activity?.toolbar?.setTitle(R.string.availableMirrors)

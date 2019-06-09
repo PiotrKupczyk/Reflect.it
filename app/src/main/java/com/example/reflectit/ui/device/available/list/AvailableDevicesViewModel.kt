@@ -23,6 +23,7 @@ class AvailableDevicesViewModel(private val manager: NsdManager) : ViewModel() {
     private val availableDevices = MutableLiveData<ArrayList<Mirror>>()
 
     fun registerDiscoverService() : LiveData<ArrayList<Mirror>> {
+        
         println("Discover registered")
         NetworkService.registerService(manager, port = 5005)
         CoroutineScope(Dispatchers.IO).launch {
