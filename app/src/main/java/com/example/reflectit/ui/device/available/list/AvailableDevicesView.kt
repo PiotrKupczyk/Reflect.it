@@ -75,9 +75,7 @@ class AvailableDevicesView : Fragment() {
 
             val hostnameSharedPref = PreferenceManager.getDefaultSharedPreferences(context)
             hostnameSharedPref.edit {
-//                this.putString(Constant.HOSTNAMEKEY, "$ip:$port")
-                //TODO remove it on production
-                this.putString(Constant.HOSTNAMEKEY, "192.168.0.178:5000")
+                this.putString(Constant.HOSTNAMEKEY, "$ip:$port")
                 apply()
             }
             Navigation.findNavController(this.view!!).navigate(R.id.pairDeviceView)
