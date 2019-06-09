@@ -22,11 +22,8 @@ class AvailableDevicesViewModel(private val manager: NsdManager) : ViewModel() {
     fun registerDiscoverService() : LiveData<ArrayList<Mirror>> {
         println("Discover registered")
         NetworkService.discoverServices(manager) { inetAddress: InetAddress, port: Int ->
-            if (inetAddress is Inet4Address) {
-                availableDevices.appendAsync(Mirror(inetAddress, port))
-            }
+            availableDevices.appendAsync(Mirror(inetAddress as Inet4Address, port))
             //TODO: call api to get mirror specific data such as GUID
-
         }
         return availableDevices
     }
