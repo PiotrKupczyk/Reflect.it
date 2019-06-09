@@ -6,9 +6,9 @@ import java.net.Inet4Address
 import java.net.InetAddress
 
 object NetworkService {
-    private const val SERVICE_TYPE = "_http._tcp."
+    const val SERVICE_TYPE = "_http._tcp."
     //    private const val SERVICE_TYPE = "_services._dns-sd._udp"
-    private const val SERVICE_NAME = "smartmirror"
+    const val SERVICE_NAME = "smartmirror"
 
     var listener: NsdManager.DiscoveryListener? = null
 

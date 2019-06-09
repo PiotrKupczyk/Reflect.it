@@ -79,8 +79,9 @@ class WidgetsSelectorView : Fragment() {
                 .filter { it != WidgetCategory.Placeholder }
                 .forEach { widgetCategory -> //iterate thought categories
                     sectionAdapter.addSection(widgetCategory.name, //set section header to category name
-                        WidgetsSectionAdapter(widgetCategory.name.toUpperCase(), widgets.filter { it.category == widgetCategory }
+                        WidgetsSectionAdapter(viewModel.selectedWidgets.value!!, widgetCategory.name.toUpperCase(), widgets.filter { it.category == widgetCategory }
                         ) {//on click handler
+
                             viewModel.selectWidget(it)
                             navigateToWidgetParametersProvider(it.id)
                         }
