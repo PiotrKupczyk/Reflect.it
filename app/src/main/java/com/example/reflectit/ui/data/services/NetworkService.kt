@@ -2,6 +2,7 @@ package com.example.reflectit.ui.data.services
 
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdServiceInfo
+import java.net.Inet4Address
 import java.net.InetAddress
 
 object NetworkService {
@@ -11,7 +12,7 @@ object NetworkService {
 
     var listener: NsdManager.DiscoveryListener? = null
 
-    fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
+    suspend fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
         listener = object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
 //                manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
@@ -95,9 +96,10 @@ object NetworkService {
 
             override fun onServiceResolved(serviceInfo: NsdServiceInfo?) {
                 println("Resolve Succeeded. $serviceInfo")
-                onServiceFoundHandler(serviceInfo!!.host, serviceInfo.port)
+                if (serviceInfo?.host is Inet4Address)
+                    onServiceFoundHandler(serviceInfo.host, serviceInfo.port)
 
-                if (serviceInfo.serviceName == SERVICE_NAME) {
+                    if (serviceInfo?.serviceName == SERVICE_NAME) {
                     println("Same IP.");
                     return
                 }

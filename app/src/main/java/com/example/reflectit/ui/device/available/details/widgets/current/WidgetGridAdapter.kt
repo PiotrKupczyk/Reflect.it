@@ -63,6 +63,7 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
             val layoutId = when {
                 holder.dragState.isActive -> 0
                 holder.dragState.isDragging -> R.drawable.dragging_state
+
                 else -> 0
             }
 

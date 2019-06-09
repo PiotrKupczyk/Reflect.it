@@ -92,7 +92,7 @@ class PairDeviceView : Fragment() {
     }
 
 
-    fun clearPin(pinview: Pinview){
+    private fun clearPin(pinview: Pinview){
         for (i in 0 until pinview.childCount) {
             val child = pinview.getChildAt(i) as EditText
             child.setText("")
