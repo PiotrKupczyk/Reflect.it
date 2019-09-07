@@ -5,8 +5,8 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="mainActivityTitle">Znalezione lustra w sieci</string>
-    <string name="availableMirrors">Dostepne lustra</string>
-    <string name="pair">Polacz sie</string>
+    <string name="availableMirrors">Dostępne lustra</string>
+    <string name="pair">Połącz się</string>
     <string name="yourMirror">Twoje lustro</string>
     <string name="widgets">Wybierz widgety</string>
     <string name="scanButton">Skanuj</string>

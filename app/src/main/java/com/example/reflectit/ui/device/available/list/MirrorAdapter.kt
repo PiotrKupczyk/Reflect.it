@@ -24,7 +24,7 @@ class MirrorAdapter(private var mirrors: ArrayList<Mirror>,
     override fun onBindViewHolder(holder: MirrorHolder, position: Int) {
         val mirror: Mirror = mirrors[position]
         holder.mirrorName.setText(R.string.defaultMirrorName)
-        holder.mirrorImage.setImageResource(R.drawable.mirror_image)
+        holder.mirrorImage.setImageResource(R.drawable.ic_mirror)
         holder.itemView.setOnClickListener {
             cellOnClickHandler(mirror.ip.toString(), mirror.port.toString())
             //pass ip to pair fragment and navigate to it

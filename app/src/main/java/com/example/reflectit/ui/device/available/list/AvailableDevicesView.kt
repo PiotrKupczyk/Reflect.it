@@ -39,6 +39,7 @@ class AvailableDevicesView : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.toolbar?.setTitle(R.string.availableMirrors)
         return inflater.inflate(R.layout.available_devices_fragment, container, false)
     }
 
@@ -49,9 +50,6 @@ class AvailableDevicesView : Fragment() {
             this,
             AvailableDevicesViewModelFactory(applicationContext?.getSystemService(Context.NSD_SERVICE) as NsdManager)
         ).get(AvailableDevicesViewModel::class.java)
-
-        activity?.toolbar?.setTitle(R.string.availableMirrors)
-
         bindRecyclerView()
     }
 

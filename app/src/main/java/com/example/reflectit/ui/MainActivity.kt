@@ -24,22 +24,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar as Toolbar?)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-
-
         NavigationUI.setupActionBarWithNavController(this, navController)
-//        supportActionBar!!.setTitle(getString(R.string.mainActivityTitle))
-
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-//        return NavigationUI.navigateUp(null, navController)
+        return NavigationUI.navigateUp(navController, null)
     }
-
-    override fun onBackPressed() {
-        navController.navigateUp()
-    }
-
 }
