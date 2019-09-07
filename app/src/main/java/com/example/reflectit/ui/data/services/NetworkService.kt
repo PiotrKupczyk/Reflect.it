@@ -12,7 +12,7 @@ object NetworkService {
 
     var listener: NsdManager.DiscoveryListener? = null
 
-    suspend fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
+    fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
         listener = object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
 //                manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))

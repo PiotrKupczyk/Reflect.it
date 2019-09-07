@@ -63,7 +63,7 @@ class AvailableDevicesView : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.registerDiscoverService().observe(this, Observer {
+        viewModel.findDevices().observe(this, Observer {
             mirrorAdapter.setData(it)
         })
     }
@@ -85,7 +85,7 @@ class AvailableDevicesView : Fragment() {
         recyclerView.adapter = mirrorAdapter
 
 
-        viewModel.registerDiscoverService().observe(this, Observer {
+        viewModel.findDevices().observe(this, Observer {
             mirrorAdapter.setData(it)
         })
     }
