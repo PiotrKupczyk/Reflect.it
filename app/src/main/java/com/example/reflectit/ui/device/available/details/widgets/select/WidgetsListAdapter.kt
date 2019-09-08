@@ -62,7 +62,7 @@ class WidgetsSectionAdapter(
                 it.setBackgroundColor(ContextCompat.getColor(it.context, R.color.white))
             } else {
                 selectedWidgets.add(widgets[position])
-                it.setBackgroundColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
+                it.setBackgroundColor(ContextCompat.getColor(it.context, R.color.colorPrimaryDark))
             }
 
             onClickHandler(widgets[position])
@@ -103,19 +103,19 @@ class WidgetsSectionAdapter(
         fun handleExpandedChanged() {
             if (this@WidgetsSectionAdapter.expanded) {
                 expandImageSwitcher.setImageResource(R.drawable.expand_less)
-                sectionTitle.setTextColor(ContextCompat.getColor(view.context, R.color.colorPrimary))
-                widgetCategoryImage.setColorFilter(ContextCompat.getColor(view.context, R.color.colorPrimary))
+                sectionTitle.setTextColor(ContextCompat.getColor(view.context, R.color.black))
+                widgetCategoryImage.setColorFilter(ContextCompat.getColor(view.context, R.color.black))
                 expandImageSwitcher.currentView.apply {
                     val imageView = this as ImageView
-                    imageView.setColorFilter(ContextCompat.getColor(view.context, R.color.colorPrimary))
+                    imageView.setColorFilter(ContextCompat.getColor(view.context, R.color.black))
                 }
             } else {
                 expandImageSwitcher.setImageResource(R.drawable.expand_more)
-                sectionTitle.setTextColor(ContextCompat.getColor(view.context, R.color.accent_material_dark))
-                widgetCategoryImage.setColorFilter(ContextCompat.getColor(view.context, R.color.accent_material_dark))
+                sectionTitle.setTextColor(ContextCompat.getColor(view.context, R.color.black))
+                widgetCategoryImage.setColorFilter(ContextCompat.getColor(view.context, R.color.black))
                 expandImageSwitcher.currentView.apply {
                     val imageView = this as ImageView
-                    imageView.setColorFilter(ContextCompat.getColor(view.context, R.color.accent_material_dark))
+                    imageView.setColorFilter(ContextCompat.getColor(view.context, R.color.black))
                 }
             }
         }
