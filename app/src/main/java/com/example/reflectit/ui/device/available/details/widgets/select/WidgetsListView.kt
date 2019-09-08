@@ -41,7 +41,6 @@ class WidgetsSelectorView : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity?.toolbar?.setTitle(R.string.widgets)
         initViewModel()
         // TODO: Use the ViewModel
         bindRecyclerView()

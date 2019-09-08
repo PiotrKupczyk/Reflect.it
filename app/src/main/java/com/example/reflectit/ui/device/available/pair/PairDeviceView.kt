@@ -47,13 +47,12 @@ class PairDeviceView : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        activity?.toolbar?.setTitle(R.string.pair)
+
         return inflater.inflate(R.layout.pair_device_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         initViewModel()
         bindPinView()
@@ -63,7 +62,6 @@ class PairDeviceView : Fragment() {
         super.onResume()
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-
     }
 
     override fun onPause() {

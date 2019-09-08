@@ -50,11 +50,8 @@ class WidgetsPositionView : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        activity?.toolbar?.setTitle(R.string.yourMirror)
-
         setupViewModel()
         setupGridRecyclerView()
-
         setupAddButton()
     }
 

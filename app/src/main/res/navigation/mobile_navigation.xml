@@ -7,7 +7,7 @@
     <fragment
             android:id="@+id/availableDevicesView"
             android:name="com.example.reflectit.ui.device.available.list.AvailableDevicesView"
-            android:label="available_devices_fragment"
+            android:label="@string/availableMirrors"
             tools:layout="@layout/available_devices_fragment">
         <action android:id="@+id/action_pair" app:destination="@+id/pairDeviceView"
                 app:enterAnim="@anim/slide_in_right"
@@ -17,7 +17,7 @@
         />
     </fragment>
     <fragment android:id="@+id/pairDeviceView" android:name="com.example.reflectit.ui.device.available.pair.PairDeviceView"
-              android:label="pair_device_fragment" tools:layout="@layout/pair_device_fragment">
+              android:label="@string/pair" tools:layout="@layout/pair_device_fragment">
         <argument android:name="mirrorIp" app:argType="string"/>
         <argument android:name="mirrorPort" app:argType="string"/>
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
             android:name="com.example.reflectit.ui.device.available.details.widgets.current.WidgetsPositionView"
-            android:label="device_settings_fragment"
+            android:label="@string/yourMirror"
             tools:layout="@layout/widgets_position_fragment"
             android:id="@+id/widgetsPositionView">
         <action
@@ -43,6 +43,6 @@
     <fragment
             android:id="@+id/widgetsSelectorView"
             android:name="com.example.reflectit.ui.device.available.details.widgets.select.WidgetsSelectorView"
-            android:label="widgets_fragment" tools:layout="@layout/widgets_list_fragment"/>
+            android:label="@string/widgets" tools:layout="@layout/widgets_list_fragment"/>
 
 </navigation>
