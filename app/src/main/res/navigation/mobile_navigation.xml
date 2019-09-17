@@ -9,12 +9,14 @@
             android:name="com.example.reflectit.ui.device.available.list.AvailableDevicesView"
             android:label="@string/availableMirrors"
             tools:layout="@layout/available_devices_fragment">
-        <action android:id="@+id/action_pair" app:destination="@+id/pairDeviceView"
-                app:enterAnim="@anim/slide_in_right"
+        <action
+                android:id="@+id/action_pair"
+                app:destination="@+id/pairDeviceView"
+                app:enterAnim="@anim/slide_out_left"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
-        />
+                />
     </fragment>
     <fragment android:id="@+id/pairDeviceView" android:name="com.example.reflectit.ui.device.available.pair.PairDeviceView"
               android:label="@string/pair" tools:layout="@layout/pair_device_fragment">

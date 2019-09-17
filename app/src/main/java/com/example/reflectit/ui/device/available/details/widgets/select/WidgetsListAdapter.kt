@@ -39,12 +39,12 @@ class WidgetsSectionAdapter(
         val widgetHolder = holder as WidgetSectionViewHolder
 
         if (selectedWidgets.contains(widgets[position])) {
-            widgetHolder.itemView.setBackgroundColor(
-                ContextCompat.getColor(
-                    widgetHolder.itemView.context,
-                    R.color.colorPrimary
+            widgetHolder.widgetName.setTextColor(
+                    ContextCompat.getColor(
+                        widgetHolder.widgetName.context,
+                        R.color.colorPrimary
+                    )
                 )
-            )
         }
 
         GlideApp
@@ -59,13 +59,12 @@ class WidgetsSectionAdapter(
         widgetHolder.itemView.setOnClickListener {
             if (selectedWidgets.contains(widgets[position])) {
                 selectedWidgets.remove(widgets[position])
-                it.setBackgroundColor(ContextCompat.getColor(it.context, R.color.white))
+                widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.blackFont))
             } else {
-                selectedWidgets.add(widgets[position])
-                it.setBackgroundColor(ContextCompat.getColor(it.context, R.color.colorPrimaryDark))
+                onClickHandler(widgets[position])
+                widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
             }
 
-            onClickHandler(widgets[position])
 
         }
     }

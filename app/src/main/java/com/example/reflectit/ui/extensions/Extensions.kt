@@ -7,7 +7,8 @@ fun <T>MutableLiveData<ArrayList<T>>.appendAsync(element: T) {
     val currentValue: ArrayList<T>
     if (this.value != null) {
         currentValue = this.value!!
-        currentValue.add(element)
+        if (!currentValue.contains(element))
+            currentValue.add(element)
     }
     else
         currentValue = arrayListOf(element)

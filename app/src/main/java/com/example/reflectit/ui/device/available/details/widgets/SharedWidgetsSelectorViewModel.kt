@@ -46,7 +46,7 @@ class  SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository)
     fun getAllWidgets(): LiveData<ArrayList<Widget>> {
         val result = MutableLiveData<ArrayList<Widget>>()
 
-        CoroutineScope(Dispatchers.Default).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val widgets = repository.getAllWidgets()
             if (widgets != null) {
                 result.postValue(ArrayList(widgets))
@@ -70,13 +70,24 @@ class  SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository)
                     val config = mutableMapOf<String, Any>()
                     val widget = selectedWidgets.value!![it]
                     val position = Position.getPositionByIndex(it) ?: Position.TopLeft
-                    if (widget.name == "weatherforecast") { // just for now
-                        config["location"] = "Wrocław,PL"
-                        config["locationID"] = "3081368"
-                        config["appid"] = "b81b05eb2425dcea5e92cadc30df5721"
+                    when (widget.name) {
+                        "weatherforecast" -> {
+                            config["location"] = "Wrocław,PL"
+                            config["locationID"] = "3081368"
+                            config["appid"] = "b81b05eb2425dcea5e92cadc30df5721"
+                            config["colorIcon"] = true
+                        }
+                        "currentweather" -> {
+                            config["location"] = "Wrocław,PL"
+                            config["locationID"] = "3081368"
+                            config["appid"] = "b81b05eb2425dcea5e92cadc30df5721"
+                            config["colorIcon"] = true
+                        }
                     }
-                    WidgetSetup(widget.name, position = position, config = config)
+
+                    WidgetSetup(module = widget.name, position = position, config = config)
                 }
+
             if (configurations != null) {
                 CoroutineScope(Dispatchers.Default).launch {
                     val code = repository.updateConfiguration(configurations)

@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.models.Mirror
+import com.example.reflectit.ui.extensions.GlideApp
 
 class MirrorAdapter(private var mirrors: ArrayList<Mirror>,
                     val cellOnClickHandler: (ip: String, port: String) -> Unit) : RecyclerView.Adapter<MirrorAdapter.MirrorHolder>() {
@@ -24,7 +26,13 @@ class MirrorAdapter(private var mirrors: ArrayList<Mirror>,
     override fun onBindViewHolder(holder: MirrorHolder, position: Int) {
         val mirror: Mirror = mirrors[position]
         holder.mirrorName.setText(R.string.defaultMirrorName)
-        holder.mirrorImage.setImageResource(R.drawable.ic_mirror)
+        GlideApp
+            .with(holder.mirrorImage.context)
+            .load("https://files.gitter.im/evancohen/smart-mirror/letL/icon.png")
+            .fitCenter()
+            .placeholder(R.drawable.ic_mirror)
+            .into(holder.mirrorImage)
+//        holder.mirrorImage.setImageResource(R.drawable.mirror_image)
         holder.itemView.setOnClickListener {
             cellOnClickHandler(mirror.ip.toString(), mirror.port.toString())
             //pass ip to pair fragment and navigate to it

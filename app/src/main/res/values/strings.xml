@@ -10,7 +10,7 @@
     <string name="yourMirror">Twoje lustro</string>
     <string name="widgets">Wybierz widgety</string>
     <string name="scanButton">Skanuj</string>
-    <string name="defaultMirrorName">Lustro</string>
+    <string name="defaultMirrorName">Magic Mirror</string>
     <string name="hostUrl"/>
     <string name="clocksLabel">Zegary</string>
     <string name="calendarsLabel">Kalendarze</string>

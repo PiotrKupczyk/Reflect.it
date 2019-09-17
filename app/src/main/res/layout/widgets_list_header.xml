@@ -23,8 +23,9 @@
 
     <TextView
             android:id="@+id/title"
-            android:textSize="25sp"
+            android:textSize="16sp"
             android:text="Section title"
+            android:gravity="center_horizontal"
             android:fontFamily="@font/avenir_pro_demi"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
 
@@ -35,7 +36,7 @@
             app:layout_constraintLeft_toRightOf="@id/widgetCategoryImage"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="16dp"/>
 
     <ImageSwitcher
             android:id="@+id/expandImageSwitcher"

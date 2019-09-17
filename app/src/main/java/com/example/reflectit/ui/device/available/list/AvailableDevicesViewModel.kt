@@ -37,6 +37,7 @@ class AvailableDevicesViewModel(private val manager: NsdManager) : ViewModel() {
     fun unregisterDiscoverService() {
         Log.d(TAG,"Discover unregistered")
         manager.stopServiceDiscovery(NetworkService.listener)
+        availableDevices.postValue(arrayListOf())
     }
     
 }
