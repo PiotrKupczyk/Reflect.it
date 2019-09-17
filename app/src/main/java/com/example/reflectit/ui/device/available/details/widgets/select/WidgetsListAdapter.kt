@@ -39,12 +39,13 @@ class WidgetsSectionAdapter(
         val widgetHolder = holder as WidgetSectionViewHolder
 
         if (selectedWidgets.contains(widgets[position])) {
-            widgetHolder.itemView.setBackgroundColor(
-                ContextCompat.getColor(
-                    widgetHolder.itemView.context,
-                    R.color.colorPrimary
-                )
-            )
+            widgetHolder.widgetName.setTextColor(ContextCompat.getColor(widgetHolder.widgetName.context, R.color.colorPrimary))
+//            widgetHolder.itemView.setBackgroundColor(
+//                ContextCompat.getColor(
+//                    widgetHolder.itemView.context,
+//                    R.color.colorPrimary
+//                )
+//            )
         }
 
         GlideApp
@@ -59,13 +60,12 @@ class WidgetsSectionAdapter(
         widgetHolder.itemView.setOnClickListener {
             if (selectedWidgets.contains(widgets[position])) {
                 selectedWidgets.remove(widgets[position])
-                it.setBackgroundColor(ContextCompat.getColor(it.context, R.color.white))
+                widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.blackFont))
             } else {
-                selectedWidgets.add(widgets[position])
-                it.setBackgroundColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
+                onClickHandler(widgets[position])
+                widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
             }
 
-            onClickHandler(widgets[position])
 
         }
     }
@@ -111,11 +111,11 @@ class WidgetsSectionAdapter(
                 }
             } else {
                 expandImageSwitcher.setImageResource(R.drawable.expand_more)
-                sectionTitle.setTextColor(ContextCompat.getColor(view.context, R.color.accent_material_dark))
-                widgetCategoryImage.setColorFilter(ContextCompat.getColor(view.context, R.color.accent_material_dark))
+                sectionTitle.setTextColor(ContextCompat.getColor(view.context, R.color.blackFont))
+                widgetCategoryImage.setColorFilter(ContextCompat.getColor(view.context, R.color.blackFont))
                 expandImageSwitcher.currentView.apply {
                     val imageView = this as ImageView
-                    imageView.setColorFilter(ContextCompat.getColor(view.context, R.color.accent_material_dark))
+                    imageView.setColorFilter(ContextCompat.getColor(view.context, R.color.blackFont))
                 }
             }
         }

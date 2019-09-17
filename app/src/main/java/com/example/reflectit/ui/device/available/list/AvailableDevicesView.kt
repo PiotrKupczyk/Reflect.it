@@ -75,9 +75,9 @@ class AvailableDevicesView : Fragment() {
 
             val hostnameSharedPref = PreferenceManager.getDefaultSharedPreferences(context)
             hostnameSharedPref.edit {
-//                this.putString(Constant.HOSTNAMEKEY, "$ip:$port")
-                //TODO remove it on production
-                this.putString(Constant.HOSTNAMEKEY, "192.168.0.178:5000")
+                this.putString(Constant.HOSTNAMEKEY, "$ip:$port")
+                // TODO remove it on production
+//                this.putString(Constant.HOSTNAMEKEY, "172.20.10.12:5000")
                 apply()
             }
             Navigation.findNavController(this.view!!).navigate(R.id.pairDeviceView)
@@ -87,9 +87,9 @@ class AvailableDevicesView : Fragment() {
         recyclerView.adapter = mirrorAdapter
 
 
-        viewModel.registerDiscoverService().observe(this, Observer {
-            mirrorAdapter.setData(it)
-        })
+//        viewModel.registerDiscoverService().observe(this, Observer {
+//            mirrorAdapter.setData(it)
+//        })
     }
 }
 

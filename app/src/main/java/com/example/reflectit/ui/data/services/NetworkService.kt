@@ -12,10 +12,9 @@ object NetworkService {
 
     var listener: NsdManager.DiscoveryListener? = null
 
-    suspend fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
+    fun discoverServices(manager: NsdManager, onServiceFoundHandler: (InetAddress, Int) -> Unit) {
         listener = object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
-//                manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
                 if (!serviceInfo?.serviceType.equals(SERVICE_TYPE)) {
                     println("Unknown Service FieldType: " + serviceInfo?.serviceType);
                 }
@@ -91,7 +90,7 @@ object NetworkService {
     private fun resolveListener(onServiceFoundHandler: (host: InetAddress, port: Int) -> Unit): NsdManager.ResolveListener {
         return object : NsdManager.ResolveListener {
             override fun onResolveFailed(serviceInfo: NsdServiceInfo?, errorCode: Int) {
-                println("Resolve failed" + errorCode);
+                println("Resolve failed$errorCode");
             }
 
             override fun onServiceResolved(serviceInfo: NsdServiceInfo?) {
@@ -100,7 +99,7 @@ object NetworkService {
                     onServiceFoundHandler(serviceInfo.host, serviceInfo.port)
 
                     if (serviceInfo?.serviceName == SERVICE_NAME) {
-                    println("Same IP.");
+                    println("Same IP.")
                     return
                 }
             }
