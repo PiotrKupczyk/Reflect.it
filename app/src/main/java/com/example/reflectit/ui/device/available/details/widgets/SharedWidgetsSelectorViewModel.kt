@@ -23,7 +23,7 @@ class  SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository)
         val currentWidgets = selectedWidgets.value
 
         val firstIndexToReplace = currentWidgets?.indexOfFirst { it.category == WidgetCategory.Placeholder }
-        if (firstIndexToReplace != null && firstIndexToReplace!=-1) {
+        if (firstIndexToReplace != null && firstIndexToReplace != -1) {
             currentWidgets[firstIndexToReplace] = element
         } else
             currentWidgets?.add(element)

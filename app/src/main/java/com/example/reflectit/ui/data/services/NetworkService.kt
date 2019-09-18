@@ -2,6 +2,7 @@ package com.example.reflectit.ui.data.services
 
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdServiceInfo
+import android.util.Log
 import java.net.Inet4Address
 import java.net.InetAddress
 
@@ -9,6 +10,7 @@ object NetworkService {
     const val SERVICE_TYPE = "_http._tcp."
     //    private const val SERVICE_TYPE = "_services._dns-sd._udp"
     const val SERVICE_NAME = "smartmirror"
+     private val logTag = "Network-service"
 
     var listener: NsdManager.DiscoveryListener? = null
 
@@ -16,10 +18,10 @@ object NetworkService {
         listener = object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
                 if (!serviceInfo?.serviceType.equals(SERVICE_TYPE)) {
-                    println("Unknown Service FieldType: " + serviceInfo?.serviceType);
+                    Log.d(logTag, "Unknown Service FieldType: " + serviceInfo?.serviceType);
                 }
 //                else if (serviceInfo?.serviceName.equals(SERVICE_NAME)) {
-//                    println("Same machine: $SERVICE_NAME");
+//                    Log.d(logTag, "Same machine: $SERVICE_NAME");
                 else if (serviceInfo?.serviceName!!.contains(SERVICE_NAME)) {
                     manager.resolveService(serviceInfo, resolveListener(onServiceFoundHandler))
                 }
@@ -27,25 +29,25 @@ object NetworkService {
 
             override fun onStopDiscoveryFailed(serviceType: String?, errorCode: Int) {
                 manager.stopServiceDiscovery(this)
-                println("Failed!!!")
+                Log.d(logTag, "Failed!!!")
             }
 
             override fun onStartDiscoveryFailed(serviceType: String?, errorCode: Int) {
                 manager.stopServiceDiscovery(this)
-                println("Failed!!!")
+                Log.d(logTag, "Failed!!!")
             }
 
             override fun onDiscoveryStarted(serviceType: String?) {
-                println("Started!!!")
+                Log.d(logTag, "Started!!!")
 
             }
 
             override fun onDiscoveryStopped(serviceType: String?) {
-                println("Stopped!!!")
+                Log.d(logTag, "Stopped!!!")
             }
 
             override fun onServiceLost(serviceInfo: NsdServiceInfo?) {
-                println("Lost!!!")
+                Log.d(logTag, "Lost!!!")
             }
         }
 
@@ -64,7 +66,6 @@ object NetworkService {
         manager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, object : NsdManager.RegistrationListener {
 
             override fun onServiceRegistered(NsdServiceInfo: NsdServiceInfo) {
-                println("registered")
                 // Save the service name. Android may have changed it in order to
                 // resolve a conflict, so update the name you initially requested
                 // with the name Android actually used.
@@ -90,16 +91,16 @@ object NetworkService {
     private fun resolveListener(onServiceFoundHandler: (host: InetAddress, port: Int) -> Unit): NsdManager.ResolveListener {
         return object : NsdManager.ResolveListener {
             override fun onResolveFailed(serviceInfo: NsdServiceInfo?, errorCode: Int) {
-                println("Resolve failed$errorCode");
+                Log.d(logTag, "Resolve failed$errorCode");
             }
 
             override fun onServiceResolved(serviceInfo: NsdServiceInfo?) {
-                println("Resolve Succeeded. $serviceInfo")
+                Log.d(logTag, "Resolve Succeeded. $serviceInfo")
                 if (serviceInfo?.host is Inet4Address)
                     onServiceFoundHandler(serviceInfo.host, serviceInfo.port)
 
                     if (serviceInfo?.serviceName == SERVICE_NAME) {
-                    println("Same IP.")
+                    Log.d(logTag, "Same IP.")
                     return
                 }
             }

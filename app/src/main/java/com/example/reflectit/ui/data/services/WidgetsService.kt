@@ -8,13 +8,23 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import kotlin.random.Random
 
 data class Widget(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("category") val category: WidgetCategory,
     @SerializedName("imgUrl") val imageUrl: String
-)
+) {
+    companion object {
+        fun getPlaceholder(): Widget =
+            Widget(
+                Random.nextInt(50, Int.MAX_VALUE),
+                "randomName",
+                WidgetCategory.Placeholder,
+                "")
+    }
+}
 
 data class WidgetDetails(
     @SerializedName("name") val name: String,

@@ -3,15 +3,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.widget.DrawableUtils
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.reflectit.R
+import com.example.reflectit.ui.data.services.Widget
+import com.example.reflectit.ui.data.services.WidgetCategory
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder
-import com.example.reflectit.ui.data.services.Widget
-import com.example.reflectit.ui.data.services.WidgetCategory
-import com.example.reflectit.ui.extensions.GlideApp
 
 
 class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: Context?) :
@@ -71,12 +70,15 @@ class WidgetGridAdapter(val selectedWidgets: MutableList<Widget>, val context: C
         }
 
         if (selectedWidgets[position].category != WidgetCategory.Placeholder) {
-            GlideApp
-                .with(holder.imageView.context)
+            Glide.with(holder.imageView.context)
                 .load(selectedWidgets[position].imageUrl)
-                .fitCenter()
-                .placeholder(R.drawable.mirror_image)
                 .into(holder.imageView)
+//            Glide
+//                .with(holder.imageView.context)
+//                .load(selectedWidgets[position].imageUrl)
+//                .fitCenter()
+//                .placeholder(R.drawable.mirror_image)
+//                .into(holder.imageView)
         }
     }
 

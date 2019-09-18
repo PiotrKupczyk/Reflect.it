@@ -8,9 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.GlideBuilder
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.models.Mirror
-import com.example.reflectit.ui.extensions.GlideApp
+import com.example.reflectit.ui.extensions.GlideAppModule
 
 class MirrorAdapter(private var mirrors: ArrayList<Mirror>,
                     val cellOnClickHandler: (ip: String, port: String) -> Unit) : RecyclerView.Adapter<MirrorAdapter.MirrorHolder>() {
@@ -26,12 +27,14 @@ class MirrorAdapter(private var mirrors: ArrayList<Mirror>,
     override fun onBindViewHolder(holder: MirrorHolder, position: Int) {
         val mirror: Mirror = mirrors[position]
         holder.mirrorName.setText(R.string.defaultMirrorName)
-        GlideApp
-            .with(holder.mirrorImage.context)
+        Glide.with(holder.mirrorImage.context)
             .load("https://files.gitter.im/evancohen/smart-mirror/letL/icon.png")
-            .fitCenter()
-            .placeholder(R.drawable.ic_mirror)
             .into(holder.mirrorImage)
+//            .with(holder.mirrorImage.context)
+//            .load("https://files.gitter.im/evancohen/smart-mirror/letL/icon.png")
+//            .fitCenter()
+//            .placeholder(R.drawable.ic_mirror)
+
 //        holder.mirrorImage.setImageResource(R.drawable.mirror_image)
         holder.itemView.setOnClickListener {
             cellOnClickHandler(mirror.ip.toString(), mirror.port.toString())

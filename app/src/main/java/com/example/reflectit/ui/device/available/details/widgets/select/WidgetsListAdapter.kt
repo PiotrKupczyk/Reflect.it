@@ -6,9 +6,10 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.reflectit.R
 import com.example.reflectit.ui.data.services.Widget
-import com.example.reflectit.ui.extensions.GlideApp
+//import com.example.reflectit.ui.extensions.GlideApp
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection
@@ -46,26 +47,27 @@ class WidgetsSectionAdapter(
                     )
                 )
         }
-
-        GlideApp
-            .with(holder.widgetImage.context)
+        Glide.with(holder.widgetImage.context)
             .load(widgets[position].imageUrl)
-            .fitCenter()
-            .placeholder(R.drawable.mirror_image)
             .into(holder.widgetImage)
+//        GlideApp
+//            .with(holder.widgetImage.context)
+//            .load(widgets[position].imageUrl)
+//            .fitCenter()
+//            .placeholder(R.drawable.mirror_image)
+//            .into(holder.widgetImage)
 
         widgetHolder.widgetName.text = widgets[position].name
 
         widgetHolder.itemView.setOnClickListener {
             if (selectedWidgets.contains(widgets[position])) {
                 selectedWidgets.remove(widgets[position])
+                selectedWidgets.add(Widget.getPlaceholder())
                 widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.blackFont))
             } else {
                 onClickHandler(widgets[position])
                 widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
             }
-
-
         }
     }
 
