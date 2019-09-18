@@ -18,7 +18,7 @@ object NetworkService {
         listener = object : NsdManager.DiscoveryListener {
             override fun onServiceFound(serviceInfo: NsdServiceInfo?) {
                 if (!serviceInfo?.serviceType.equals(SERVICE_TYPE)) {
-                    Log.d(logTag, "Unknown Service FieldType: " + serviceInfo?.serviceType);
+                    Log.d(logTag, "Unknown Service FieldType: " + serviceInfo?.serviceType)
                 }
 //                else if (serviceInfo?.serviceName.equals(SERVICE_NAME)) {
 //                    Log.d(logTag, "Same machine: $SERVICE_NAME");

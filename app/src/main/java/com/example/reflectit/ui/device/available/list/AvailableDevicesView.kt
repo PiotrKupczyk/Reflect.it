@@ -80,11 +80,6 @@ class AvailableDevicesView : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
         recyclerView.adapter = mirrorAdapter
-
-
-        viewModel.findDevices().observe(this, Observer {
-            mirrorAdapter.setData(it)
-        })
     }
 }
 
