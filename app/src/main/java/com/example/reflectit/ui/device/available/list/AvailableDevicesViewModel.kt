@@ -26,9 +26,7 @@ class AvailableDevicesViewModel(private val manager: NsdManager) : ViewModel() {
             NetworkService.discoverServices(manager) { inetAddress: InetAddress, port: Int ->
                 if (inetAddress is Inet4Address) {
                     Log.d(TAG,"Found available device. Address: ${inetAddress}, port: ${port}")
-                    if (!availableDevices.value!!.any { x -> x.ip == inetAddress }){
-                        availableDevices.appendAsync(Mirror(inetAddress, port))
-                    }
+                    availableDevices.appendAsync(Mirror(inetAddress, port))
                 }
             }
         }
