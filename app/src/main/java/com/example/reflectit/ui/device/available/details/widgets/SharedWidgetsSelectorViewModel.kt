@@ -83,6 +83,10 @@ class  SharedWidgetsSelectorViewModel(private val repository: WidgetsRepository)
                             config["appid"] = "b81b05eb2425dcea5e92cadc30df5721"
                             config["colorIcon"] = true
                         }
+                        "MMM-AVStock" -> {
+                            config["apiKey"] = "ZXMK0OQR0SOQE7OS"
+                            config["symbols"] = arrayOf("aapl", "GOOGL", "005930.KS")
+                        }
                     }
 
                     WidgetSetup(module = widget.name, position = position, config = config)

@@ -43,7 +43,7 @@ class WidgetsSectionAdapter(
             widgetHolder.widgetName.setTextColor(
                     ContextCompat.getColor(
                         widgetHolder.widgetName.context,
-                        R.color.colorPrimary
+                        R.color.blackFont
                     )
                 )
         }
@@ -66,7 +66,7 @@ class WidgetsSectionAdapter(
                 widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.blackFont))
             } else {
                 onClickHandler(widgets[position])
-                widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
+                widgetHolder.widgetName.setTextColor(ContextCompat.getColor(it.context, R.color.colorAccent))
             }
         }
     }

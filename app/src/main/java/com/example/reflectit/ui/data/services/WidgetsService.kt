@@ -51,6 +51,7 @@ enum class WidgetCategory {
     @SerializedName("weather") Weather,
     @SerializedName("info") Info,
     @SerializedName("time") Time,
+    @SerializedName("finance") Finance,
     Placeholder
 }
 
